@@ -4,4 +4,9 @@ module.exports = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: [
+      "i.imgur.com",
+    ],
+  },
 }
