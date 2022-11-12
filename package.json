@@ -8,6 +8,8 @@
   "dependencies": {
     "ioredis": "^5.2.4",
     "next": "latest",
+    "pusher": "^5.1.1-beta",
+    "pusher-js": "^7.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^1.3.0",
