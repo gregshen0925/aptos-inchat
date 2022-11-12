@@ -11,7 +11,7 @@ const MessageComponent = ({ message }: Props) => {
 
   return (
     <div className={`flex w-fit ${isUser ? "ml-auto" : null}`}>
-      <div className={`flex-shrink-0 ${isUser ? "order-2" : null}`}>
+      <div className={`flex-shrink-0 pt-2 ${isUser ? "order-2" : null}`}>
         <Image
           className="rounded-full mx-2"
           height={10}

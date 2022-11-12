@@ -5,9 +5,6 @@ module.exports = {
     appDir: true,
   },
   images: {
-    domains: [
-      "i.imgur.com",
-      "image.cnbcfm.com",
-    ],
+    domains: ["i.imgur.com", "img.alicdn.com"],
   },
-}
+};

@@ -14,7 +14,6 @@ const ChatInput = () => {
     mutate,
   } = useSWR<Message[]>("/api/getMessages", fetcher);
 
-  console.log(messages);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
@@ -24,7 +23,6 @@ const ChatInput = () => {
     if (!input) return;
 
     const messageToSend = input;
-    console.log(messageToSend);
 
     setInput("");
 
@@ -34,9 +32,9 @@ const ChatInput = () => {
       id,
       message: messageToSend,
       create_at: Date.now(),
-      username: "Elon Musk",
+      username: "Greg Shen",
       profilePic:
-        "https://image.cnbcfm.com/api/v1/image/107063491-16529089492022-05-18t210710z_1773411046_rc2w9u9z7ee9_rtrmadp_0_tesla-musk.jpeg?v=1668023539",
+        "https://img.alicdn.com/i4/915359562/O1CN01guaZX42KVRqA3OD2o_!!915359562.jpg_q50s50.jpg",
       email: "elonmusk@elon.musk",
     };
 
@@ -62,7 +60,7 @@ const ChatInput = () => {
   return (
     <form
       onSubmit={addMessage}
-      className="fixed bottom-0 z-50 w-full flex px-10 py-5 space-x-2 border-t border-gray-100 bg-white"
+      className="bg-white fixed bottom-0 z-50 w-full flex px-10 py-5 space-x-2 border-t border-gray-100"
     >
       <input
         type="text"
