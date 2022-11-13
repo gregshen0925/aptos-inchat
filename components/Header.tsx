@@ -1,12 +1,18 @@
+"use client";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import LogoutButton from "./LogoutButton";
+import ConnectModal from "./ConnectModal";
+import ConnectButton from "./ConnectButton";
 
 type Props = {};
 
 const Header = (props: Props) => {
-  const session = true;
+  const { account, disconnect, connected, wallet: currentWallet } = useWallet();
+
+  const session = false;
   if (session)
     return (
       <header className="sticky top-0 z-50 bg-white flex justify-between items-center p-5 sm:p-10 shadow-sm">

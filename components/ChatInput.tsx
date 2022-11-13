@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { Message } from "../typing.d";
+import { Message } from "../typing";
 import useSWR from "swr";
 import fetcher from "../utils/fetchMessages";
 
