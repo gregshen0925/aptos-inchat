@@ -9,7 +9,7 @@ const Header = (props: Props) => {
   const session = true;
   if (session)
     return (
-      <header className="sticky top-0 z-50 bg-white flex justify-between items-center p-10 shadow-sm">
+      <header className="sticky top-0 z-50 bg-white flex justify-between items-center p-5 sm:p-10 shadow-sm">
         <div className="flex space-x-2">
           <Link href={"/"}>
             <Image
