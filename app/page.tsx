@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/styles.css";
 // import { AptosWalletProvider } from "../context/AptosWalletProvider";
-import Login from "../components/LogIn";
+import LogIn from "../components/LogIn";
 
 type Props = {};
 
@@ -10,7 +10,7 @@ const HomePage = (props: Props) => {
     <div>
       <main>
         {/* <AptosWalletProvider> */}
-        <Login />
+        <LogIn />
         {/* </AptosWalletProvider> */}
       </main>
     </div>
