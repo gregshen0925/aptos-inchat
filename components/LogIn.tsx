@@ -41,7 +41,7 @@ const Login = (props: Props) => {
         {connectModalOn ? (
           <ConnectModal setConnectModalOn={setConnectModalOn} />
         ) : null} */}
-        <Link href={"/dashboard"}>
+        <Link href={"/dashboard/"}>
           <div className="button-container-1">
             <span className="mas">Enter</span>
             <button type="button" name="Hover">
