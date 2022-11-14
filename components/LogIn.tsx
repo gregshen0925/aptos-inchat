@@ -5,7 +5,7 @@ import Link from "next/link";
 
 type Props = {};
 
-const Login = () => {
+const Login = (props: Props) => {
   const [text, count] = useTypewriter({
     words: [`Perfect showcase for Aptos Token Design`],
     delaySpeed: 500,
