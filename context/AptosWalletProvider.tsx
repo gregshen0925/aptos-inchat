@@ -22,7 +22,10 @@ type WalletProvider = {
 export const AptosWalletProvider: FC<WalletProvider> = ({ children }) => {
   const wallets = useMemo(
     () => [
-      //   new BloctoWalletAdapter({ network: WalletAdapterNetwork.Mainnet }),
+      new BloctoWalletAdapter({
+        network: WalletAdapterNetwork.Mainnet,
+        bloctoAppId: "Aptos InJoin",
+      }),
       new MartianWalletAdapter(),
       new AptosWalletAdapter(),
       new RiseWalletAdapter(),

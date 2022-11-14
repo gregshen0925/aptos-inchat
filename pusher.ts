@@ -3,8 +3,8 @@ import ClientPusher from "pusher-js";
 
 export const serverPusher = new Pusher({
   appId: "1505769",
-  key: process.env.PUSHER_KEY!,
-  secret: process.env.SERVER_PUSHER_SECRET!,
+  key: "28400a36845ae4962915",
+  secret: "b520eb181bfd7859f4e8",
   cluster: "ap3",
   useTLS: true,
 });

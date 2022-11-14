@@ -3,6 +3,7 @@ export type Message = {
   message: string;
   create_at: number;
   username: string;
+  userAddress?: string;
   profilePic: string;
   email: string;
 };

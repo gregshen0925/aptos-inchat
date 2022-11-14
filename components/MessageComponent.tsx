@@ -2,12 +2,22 @@
 
 import Image from "next/image";
 import { Message } from "../typing";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 type Props = {
   message: Message;
 };
 
 const MessageComponent = ({ message }: Props) => {
-  const isUser = true;
+  const { account, disconnect, connected, wallet: currentWallet } = useWallet();
+  const [isUser, setIsUser] = useState(false);
+
+  useEffect(() => {
+    if (message.username == account?.address?.toString()) {
+      setIsUser(true);
+    }
+  }, [connected, account, message]);
 
   return (
     <div className={`flex w-fit ${isUser ? "ml-auto" : null}`}>

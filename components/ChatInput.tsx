@@ -5,9 +5,11 @@ import { v4 as uuid } from "uuid";
 import { Message } from "../typing";
 import useSWR from "swr";
 import fetcher from "../utils/fetchMessages";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 const ChatInput = () => {
   const [input, setInput] = useState("");
+  const { account, disconnect, connected, wallet: currentWallet } = useWallet();
   const {
     data: messages,
     error,
@@ -32,7 +34,7 @@ const ChatInput = () => {
       id,
       message: messageToSend,
       create_at: Date.now(),
-      username: "Greg Shen",
+      username: account?.address?.toString()!,
       profilePic:
         "https://img.alicdn.com/i4/915359562/O1CN01guaZX42KVRqA3OD2o_!!915359562.jpg_q50s50.jpg",
       email: "elonmusk@elon.musk",

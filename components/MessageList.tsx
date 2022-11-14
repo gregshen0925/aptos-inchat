@@ -30,6 +30,11 @@ const MessageList = () => {
         });
       }
     });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
   }, [messages, mutate, clientPusher]);
 
   return (
