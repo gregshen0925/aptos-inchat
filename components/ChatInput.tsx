@@ -7,7 +7,11 @@ import useSWR from "swr";
 import fetcher from "../utils/fetchMessages";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
-const ChatInput = () => {
+type Props = {
+  username: string;
+};
+
+const ChatInput = ({ username }: Props) => {
   const [input, setInput] = useState("");
   const { account, disconnect, connected, wallet: currentWallet } = useWallet();
   const {
@@ -34,7 +38,7 @@ const ChatInput = () => {
       id,
       message: messageToSend,
       create_at: Date.now(),
-      username: account?.address?.toString()!,
+      username: username,
       profilePic:
         "https://img.alicdn.com/i4/915359562/O1CN01guaZX42KVRqA3OD2o_!!915359562.jpg_q50s50.jpg",
       email: "elonmusk@elon.musk",

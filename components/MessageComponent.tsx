@@ -5,14 +5,15 @@ import { useState } from "react";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 type Props = {
   message: Message;
+  username: string;
 };
 
-const MessageComponent = ({ message }: Props) => {
+const MessageComponent = ({ message, username }: Props) => {
   const { account, disconnect, connected, wallet: currentWallet } = useWallet();
   const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
-    if (message.username == account?.address?.toString()) {
+    if (message.username == username) {
       setIsUser(true);
     }
   }, [connected, account, message]);
@@ -35,12 +36,7 @@ const MessageComponent = ({ message }: Props) => {
             isUser ? "text-blue-400 text-right" : "text-red-400 text-left"
           }`}
         >
-          {/* {message.username} */}
-          {message.username.substring(0, 5)}...
-          {message.username.substring(
-            message.username.length - 5,
-            message.username.length
-          )}
+          {message.username}
         </div>
 
         <div className="flex items-end">

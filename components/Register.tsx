@@ -2,7 +2,6 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
 import { Types } from "aptos";
 import { AptosClient } from "aptos";
-import { motion } from "framer-motion";
 
 type Props = {
   username: string;
@@ -29,7 +28,7 @@ const Register = ({ username, setUsername }: Props) => {
         function:
           "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::injoin_v1::register",
         type_arguments: [],
-        arguments: [input, "description", "https://i.imgur.com/n7kEnSq.png"],
+        arguments: [input, "", "https://i.imgur.com/n7kEnSq.png"],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
@@ -45,23 +44,6 @@ const Register = ({ username, setUsername }: Props) => {
 
   return (
     <div className="max-w-3xl">
-      <div className="flex justify-center pt-5">
-        {connected && !username ? (
-          <motion.div
-            whileTap={{
-              scale: 0.8,
-              borderRadius: "100%",
-            }}
-          >
-            <button
-              className="px-2 py-2 bg-black text-white rounded-lg hover:bg-gray-800"
-              onClick={() => setUsername(1)}
-            >
-              Mock Register
-            </button>
-          </motion.div>
-        ) : null}
-      </div>
       <div className="text-xl text-center py-5 text-bold">
         Register Your Account First!
       </div>

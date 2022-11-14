@@ -29,7 +29,7 @@ const Home = ({ messages }: Props) => {
   }, [connected]);
 
   useEffect(() => {
-    if (!connected) {
+    if (!connected || !address) {
       return;
     }
     // console.log("address:", address)
@@ -48,12 +48,12 @@ const Home = ({ messages }: Props) => {
           }
         )
         .then((username) => {
-          console.log(username)
-          return username
+          console.log(username);
+          return username;
         })
         .catch((err) => {
-          console.log(err)
-          return ""
+          console.log(err);
+          return "";
         });
 
       setUsername(username);
@@ -90,8 +90,8 @@ const Home = ({ messages }: Props) => {
       ) : null}
       {connected && username ? (
         <div>
-          <MessageList initialMessages={messages} />
-          <ChatInput />
+          <MessageList initialMessages={messages} username={username} />
+          <ChatInput username={username} />
         </div>
       ) : null}
     </div>
