@@ -1,3 +1,5 @@
+"use client";
+
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
 import { Types } from "aptos";

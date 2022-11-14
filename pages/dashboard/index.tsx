@@ -10,11 +10,9 @@ import InboxModal from "../../components/InboxModal";
 import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 
-type Props = {
-  messages: Message[];
-};
+type Props = {};
 
-const Home = ({ messages }: Props) => {
+const Home = (props: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
@@ -48,7 +46,6 @@ const Home = ({ messages }: Props) => {
           }
         )
         .then((username) => {
-          console.log(username);
           return username;
         })
         .catch((err) => {
@@ -57,7 +54,6 @@ const Home = ({ messages }: Props) => {
         });
 
       setUsername(username);
-      // setUsername(1);
       console.log(username);
     };
 
@@ -90,7 +86,7 @@ const Home = ({ messages }: Props) => {
       ) : null}
       {connected && username ? (
         <div>
-          <MessageList initialMessages={messages} username={username} />
+          <MessageList username={username} />
           <ChatInput username={username} />
         </div>
       ) : null}

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import useSWR from "swr";
 import { clientPusher } from "../pusher";
@@ -6,11 +8,10 @@ import fetcher from "../utils/fetchMessages";
 import MessageComponent from "./MessageComponent";
 
 type Props = {
-  initialMessages: Message[];
   username: string;
 };
 
-const MessageList = ({ username, initialMessages }: Props) => {
+const MessageList = ({ username }: Props) => {
   const {
     data: messages,
     error,
@@ -42,7 +43,7 @@ const MessageList = ({ username, initialMessages }: Props) => {
 
   return (
     <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto">
-      {(messages || initialMessages).map((message) => (
+      {messages?.map((message) => (
         <MessageComponent
           key={message.id}
           message={message}

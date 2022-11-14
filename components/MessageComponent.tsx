@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Message } from "../typing";
 import { useEffect } from "react";
