@@ -1,7 +1,6 @@
-"use client";
 import React from "react";
 import "../styles/styles.css";
-import { AptosWalletProvider } from "../context/AptosWalletProvider";
+// import { AptosWalletProvider } from "../context/AptosWalletProvider";
 import Login from "../components/Login";
 
 type Props = {};
@@ -9,9 +8,9 @@ type Props = {};
 const HomePage = (props: Props) => {
   return (
     <main>
-      <AptosWalletProvider>
-        <Login />
-      </AptosWalletProvider>
+      {/* <AptosWalletProvider> */}
+      <Login />
+      {/* </AptosWalletProvider> */}
     </main>
   );
 };

@@ -49,8 +49,8 @@ const Header = ({
                 {account?.address
                   ?.toString()
                   .substring(
-                    account.address?.toString().length - 5,
-                    account.address?.toString().length
+                    account?.address?.toString().length - 5,
+                    account?.address?.toString().length
                   )}
               </p>
             </div>
