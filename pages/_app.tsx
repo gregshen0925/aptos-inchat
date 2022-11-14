@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { AptosWalletProvider } from "../context/AptosWalletProvider";
 import "../styles/styles.css";

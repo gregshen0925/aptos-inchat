@@ -100,12 +100,12 @@ const Home = ({ messages }: Props) => {
 
 export default Home;
 
-export async function getServerSideProps() {
-  const data = await fetch(
-    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
-  ).then((res) => res.json());
-  const messages: Message[] = data.messages;
-  return {
-    props: { messages },
-  };
-}
+// export async function getServerSideProps() {
+//   const data = await fetch(
+//     `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
+//   ).then((res) => res.json());
+//   const messages: Message[] = data.messages;
+//   return {
+//     props: { messages },
+//   };
+// }
