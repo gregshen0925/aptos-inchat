@@ -1,24 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import ConnectButton from "./ConnectButton";
-import ConnectModal from "./ConnectModal";
+import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
-import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import Link from "next/link";
 
 type Props = {};
 
 const Login = () => {
-  const [address, setAddress] = useState<string | null | undefined>(null);
-  const [connectModalOn, setConnectModalOn] = useState(false);
-
   const [text, count] = useTypewriter({
     words: [`Perfect showcase for Aptos Token Design`],
     delaySpeed: 500,
   });
 
   return (
-    <>
+    <div>
       <div
         className="bg-[#000000] min-h-screen flex flex-col
           items-center justify-center text-center"
@@ -56,7 +50,7 @@ const Login = () => {
           </div>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 
