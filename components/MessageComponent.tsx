@@ -37,7 +37,12 @@ const MessageComponent = ({ message }: Props) => {
             isUser ? "text-blue-400 text-right" : "text-red-400 text-left"
           }`}
         >
-          {message.username}
+          {/* {message.username} */}
+          {message.username.substring(0, 5)}...
+          {message.username.substring(
+            message.username.length - 5,
+            message.username.length
+          )}
         </p>
 
         <div className="flex items-end">

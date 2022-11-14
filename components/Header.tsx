@@ -3,6 +3,7 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import Login from "./LogIn";
 
 type Props = {
   setConnectModalOn: Function;
@@ -12,7 +13,7 @@ const Header = ({ setConnectModalOn }: Props) => {
   const { account, disconnect, connected, wallet: currentWallet } = useWallet();
 
   return (
-    <header className="sticky top-0 z-50 bg-white flex justify-between items-center p-5 sm:p-10 shadow-sm">
+    <header className="sticky top-0 z-50 flex justify-between items-center p-5 sm:p-10 shadow-sm">
       <div className="flex space-x-2">
         <Link href={"/dashboard/1"}>
           <Image
@@ -24,8 +25,24 @@ const Header = ({ setConnectModalOn }: Props) => {
           />
         </Link>
         <div>
-          <p className="text-blue-400">Logged in as:</p>
-          <p className="font-bold text-lg">Greg Shen</p>
+          {account ? (
+            <div>
+              <p className="text-blue-400">Logged in as:</p>
+
+              <p className="font-bold text-lg">
+                <p className="text-center py-1 text-sm text-blue-400 font-semibold"></p>
+                {account?.address?.toString().substring(0, 5)}...
+                {account?.address
+                  ?.toString()
+                  .substring(
+                    account.address?.toString().length - 5,
+                    account.address?.toString().length
+                  )}
+              </p>
+            </div>
+          ) : (
+            <div>Login first</div>
+          )}
         </div>
       </div>
       <div>
@@ -41,17 +58,6 @@ const Header = ({ setConnectModalOn }: Props) => {
             {connected ? "Disconnect" : "Connect Wallet"}
           </button>
         </div>
-        {connected ? (
-          <p className="text-center py-1 text-sm text-blue-400 font-semibold">
-            {account?.address?.toString().substring(0, 5)}...
-            {account?.address
-              ?.toString()
-              .substring(
-                account.address?.toString().length - 5,
-                account.address?.toString().length
-              )}
-          </p>
-        ) : null}
       </div>
     </header>
   );

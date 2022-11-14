@@ -31,7 +31,7 @@ const DashBoard = (props: Props) => {
   }, [connected]);
 
   return (
-    <div>
+    <div className="">
       <Header setConnectModalOn={setConnectModalOn} />
       {connectModalOn ? (
         <ConnectModal setConnectModalOn={setConnectModalOn} />
