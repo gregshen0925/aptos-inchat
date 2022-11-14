@@ -60,6 +60,7 @@ const Home = ({ messages }: Props) => {
         setConnectModalOn={setConnectModalOn}
         setInviteModalOn={setInviteModalOn}
         setInboxModalOn={setInboxModalOn}
+        registered={registered}
       />
       {connectModalOn ? (
         <ConnectModal setConnectModalOn={setConnectModalOn} />
@@ -74,7 +75,7 @@ const Home = ({ messages }: Props) => {
           <Register />
         </div>
       ) : null}
-      {connected ? (
+      {connected && registered ? (
         <div>
           <MessageList initialMessages={messages} />
           <ChatInput />

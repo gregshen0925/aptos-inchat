@@ -9,12 +9,14 @@ type Props = {
   setConnectModalOn: Function;
   setInboxModalOn: Function;
   setInviteModalOn: Function;
+  registered: number;
 };
 
 const Header = ({
   setConnectModalOn,
   setInboxModalOn,
   setInviteModalOn,
+  registered,
 }: Props) => {
   const {
     account,
@@ -57,7 +59,7 @@ const Header = ({
           )}
         </div>
       </div>
-      {connected ? (
+      {connected && registered ? (
         <div className="space-x-2 flex">
           <motion.div
             whileTap={{
