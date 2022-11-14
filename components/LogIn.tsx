@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { useTypewriter } from "react-simple-typewriter";
 import Link from "next/link";
 
 type Props = {};
