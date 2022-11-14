@@ -30,7 +30,7 @@ const MessageComponent = ({ message }: Props) => {
       </div>
 
       <div>
-        <p
+        <div
           className={`text-[0.65rem] px-[2px] pb-[2px] ${
             isUser ? "text-blue-400 text-right" : "text-red-400 text-left"
           }`}
@@ -41,7 +41,7 @@ const MessageComponent = ({ message }: Props) => {
             message.username.length - 5,
             message.username.length
           )}
-        </p>
+        </div>
 
         <div className="flex items-end">
           <div
