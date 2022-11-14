@@ -30,7 +30,7 @@ const index = ({ setConnectModalOn }: Props) => {
           key={wallet.adapter.name}
         >
           <li>
-            <div className="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-500 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-gray-800 dark:hover:bg-gray-500 dark:text-white">
+            <div className="flex items-center p-3 text-base font-bold rounded-lg group hover:shadow bg-gray-800 hover:bg-gray-500 dark:text-white">
               <button
                 onClick={() => {
                   connect(option.name);
@@ -69,7 +69,7 @@ const index = ({ setConnectModalOn }: Props) => {
         >
           <button
             onClick={() => setConnectModalOn(false)}
-            className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+            className="absolute top-3 right-2.5 text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-800 hover:text-white"
           >
             <svg
               aria-hidden="true"
