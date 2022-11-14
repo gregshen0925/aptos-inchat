@@ -73,7 +73,7 @@ const ChatInput = ({ username }: Props) => {
         value={input}
         onChange={handleChange}
         placeholder="Enter message here..."
-        className="flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
+        className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
                 px-5 py-3 disables:opacity-50 disabled:cursor-not-allowed"
       />
       <button

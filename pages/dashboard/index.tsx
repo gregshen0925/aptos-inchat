@@ -84,6 +84,11 @@ const Home = (props: Props) => {
           <Register setUsername={setUsername} username={username} />
         </div>
       ) : null}
+      {!connected ? (
+        <div className="font-bold text-2xl sm:text-4xl text-white pt-10 text-center">
+          Please Connect Wallet First
+        </div>
+      ) : null}
       {connected && username ? (
         <div className="bg-black">
           <MessageList username={username} />

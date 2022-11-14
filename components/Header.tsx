@@ -2,7 +2,7 @@
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 type Props = {
@@ -18,6 +18,7 @@ const Header = ({
   setInviteModalOn,
   username,
 }: Props) => {
+  const [address, setAddress] = useState<string | null | undefined>(null);
   const {
     account,
     disconnect,
@@ -25,6 +26,11 @@ const Header = ({
     connecting,
     wallet: currentWallet,
   } = useWallet();
+
+  useEffect(() => {
+    setAddress(account?.address?.toString());
+    // console.log(account);
+  }, [connected, account]);
 
   return (
     <header className="sticky top-0 z-50 flex justify-between items-center p-5 sm:p-10 shadow-sm md:px-20 bg-black">
@@ -113,15 +119,16 @@ const Header = ({
             </div>
           </motion.div>
           <div className="text-center text-sm font-bold text-white py-1">
-            {account?.address?.toString().substring(0, 5)}
-            {account ? <span>...</span> : null}
-            {connecting ? <div>Loading...</div> : null}
-            {account?.address
-              ?.toString()
-              .substring(
-                account?.address?.toString().length - 5,
-                account?.address?.toString().length
-              )}
+            {address
+              ? account?.address?.toString().substring(0, 5) +
+                "..." +
+                account?.address
+                  ?.toString()
+                  .substring(
+                    account?.address?.toString().length - 5,
+                    account?.address?.toString().length
+                  )
+              : null}
           </div>
         </div>
       </div>

@@ -46,12 +46,12 @@ const Register = ({ username, setUsername }: Props) => {
 
   return (
     <div className="max-w-3xl">
-      <div className="text-xl text-center py-5 text-bold">
-        Register Your Account First!
+      <div className="text-xl text-center py-5 font-bold text-white">
+        Register Your Account
       </div>
       <form>
         <div className="py-3">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">
+          <label className="block mb-2 text-sm font-medium text-gray-300">
             User Name
           </label>
           <input
@@ -64,21 +64,7 @@ const Register = ({ username, setUsername }: Props) => {
             required={true}
           />
         </div>
-        {/* <div className="py-3">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">
-            User Name
-          </label>
-          <input
-            type="description"
-            id="description"
-            value={input}
-            onChange={handleChange}
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            placeholder="Introduce yourself"
-            required={true}
-          />
-        </div> */}
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">
+        <label className="block mb-2 text-sm font-medium text-gray-300">
           Avatar
         </label>
         <input
@@ -95,7 +81,7 @@ const Register = ({ username, setUsername }: Props) => {
               id="terms"
               type="checkbox"
               value=""
-              className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+              className="w-4 h-4 rounded border  focus:ring-3 focus:ring-blue-300 bg-gray-700 border-gray-600 dark:focus:ring-blue-600 ring-offset-gray-800"
               required={true}
             />
           </div>
@@ -114,7 +100,7 @@ const Register = ({ username, setUsername }: Props) => {
           <button
             type="button"
             onClick={handleRegister}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
           >
             Register new account
           </button>

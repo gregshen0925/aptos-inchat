@@ -47,7 +47,7 @@ const index = ({ setConnectModalOn }: Props) => {
                   {option.name == "Martian" ||
                   option.name == "Petra" ||
                   option.name == "Blocto" ? (
-                    <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-400">
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-400 bg-gray-200 rounded dark:bg-gray-700">
                       Popular
                     </span>
                   ) : null}
@@ -65,7 +65,7 @@ const index = ({ setConnectModalOn }: Props) => {
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
         <div
           ref={clickOutsideRef}
-          className="relative bg-black rounded-lg shadow dark:bg-black-700 border-[1px] border-white overflow-y-scroll"
+          className="relative rounded-lg shadow bg-black border-[1px] border-white overflow-y-scroll"
         >
           <button
             onClick={() => setConnectModalOn(false)}
@@ -86,13 +86,13 @@ const index = ({ setConnectModalOn }: Props) => {
             </svg>
           </button>
 
-          <div className="py-4 px-6 rounded-t border-b dark:border-gray-800">
-            <h3 className="text-base font-semibold text-gray-900 lg:text-2xl dark:text-white">
+          <div className="py-4 px-6 rounded-t border-b border-gray-800">
+            <h3 className="text-base font-semibold lg:text-2xl text-white ">
               Connect Wallet
             </h3>
           </div>
           <div className="p-6">
-            <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
+            <p className="text-sm font-normal text-gray-400">
               Connect with one of the following wallets.
             </p>
             <ul className="my-4 space-y-3">{renderWalletConnectorGroup()}</ul>
