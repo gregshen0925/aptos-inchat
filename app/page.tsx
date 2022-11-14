@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/styles.css";
 // import { AptosWalletProvider } from "../context/AptosWalletProvider";
-import Login from "../components/Login";
+import Login from "../components/LogIn";
 
 type Props = {};
 
