@@ -64,7 +64,7 @@ const Home = (props: Props) => {
     <div className="">
       <title>InJoin Dashboard</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <link rel="icon" href="https://i.imgur.com/SjaOCZH.png" />
+      <link rel="icon" href="https://i.imgur.com/W7K187R.png" />
       <Header
         setConnectModalOn={setConnectModalOn}
         setInviteModalOn={setInviteModalOn}
