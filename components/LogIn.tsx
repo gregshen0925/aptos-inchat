@@ -35,13 +35,7 @@ const LogIn = (props: Props) => {
             {text}
           </span>
         </div>
-        {/* <div className="flex items-center p-8 animate-pulse">
-          <ConnectButton setConnectModalOn={setConnectModalOn} />
-        </div>
-        {connectModalOn ? (
-          <ConnectModal setConnectModalOn={setConnectModalOn} />
-        ) : null} */}
-        <Link href="/dashboard">
+        <Link href={"/dashboard"}>
           <div className="button-container-1">
             <span className="mas">Enter</span>
             <button type="button" name="Hover">
