@@ -34,8 +34,8 @@ const MessageComponent = ({ message, username }: Props) => {
 
       <div>
         <div
-          className={`text-[0.65rem] px-[2px] pb-[2px] ${
-            isUser ? "text-blue-400 text-right" : "text-red-400 text-left"
+          className={`text-[0.65rem] px-[2px] pb-[2px] text-white ${
+            isUser ? "text-blue-500 text-right" : "text-red-500 text-left"
           }`}
         >
           {message.username}
@@ -44,7 +44,7 @@ const MessageComponent = ({ message, username }: Props) => {
         <div className="flex items-end">
           <div
             className={`px-3 py-2 rounded-lg w-fit text-white ${
-              isUser ? "bg-blue-400 ml-auto order-2" : "bg-red-400"
+              isUser ? "bg-blue-500 ml-auto order-2" : "bg-red-500"
             }`}
           >
             <p>{message.message}</p>

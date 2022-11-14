@@ -27,11 +27,11 @@ const Header = ({
   } = useWallet();
 
   return (
-    <header className="sticky top-0 z-50 flex justify-between items-center p-5 sm:p-10 shadow-sm md:px-20">
+    <header className="sticky top-0 z-50 flex justify-between items-center p-5 sm:p-10 shadow-sm md:px-20 bg-black">
       <div className="flex space-x-2">
         <Link href={"/"}>
           <Image
-            className="mx-2 object-contain grayscale hover:grayscale-0"
+            className="mx-2 object-contain grayscale hover:grayscale-0 bg-white rounded-lg p-2"
             height={10}
             width={50}
             src="https://i.imgur.com/n7kEnSq.png"
@@ -44,7 +44,9 @@ const Header = ({
               <p className="text-blue-400 font-bold text-lg sm:text-2xl">
                 Aptos InJoin
               </p>
-              <p className="font-bold text-sm">Logged in as: {username}</p>
+              <p className="font-bold text-sm text-white">
+                Logged in as: {username}
+              </p>
             </div>
           ) : (
             <div className="text-blue-400 font-bold text-lg sm:text-2xl">
@@ -65,7 +67,7 @@ const Header = ({
                 }}
               >
                 <button
-                  className="px-2 py-2 bg-black text-white rounded-lg hover"
+                  className="px-2 py-2 bg-black text-white rounded-lg border-[1px] border-white font-bold"
                   onClick={() => setInviteModalOn(true)}
                 >
                   Invite
@@ -79,7 +81,7 @@ const Header = ({
                 }}
               >
                 <button
-                  className="px-2 py-2 bg-black text-white rounded-lg"
+                  className="px-2 py-2 bg-black text-white rounded-lg border-[1px] border-white font-bold"
                   onClick={() => setInboxModalOn(true)}
                 >
                   Inbox
@@ -110,7 +112,7 @@ const Header = ({
               </button>
             </div>
           </motion.div>
-          <div className="text-center text-sm font-bold">
+          <div className="text-center text-sm font-bold text-white py-1">
             {account?.address?.toString().substring(0, 5)}
             {account ? <span>...</span> : null}
             {connecting ? <div>Loading...</div> : null}

@@ -66,14 +66,14 @@ const ChatInput = ({ username }: Props) => {
   return (
     <form
       onSubmit={addMessage}
-      className="bg-white fixed bottom-0 z-50 w-full flex px-10 py-5 space-x-2 border-t border-gray-100"
+      className="fixed bottom-0 z-50 w-full flex px-10 md:px-20 py-5 space-x-2 bg-black justify-center"
     >
       <input
         type="text"
         value={input}
         onChange={handleChange}
         placeholder="Enter message here..."
-        className="flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
+        className="flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
                 px-5 py-3 disables:opacity-50 disabled:cursor-not-allowed"
       />
       <button

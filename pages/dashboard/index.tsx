@@ -61,7 +61,7 @@ const Home = (props: Props) => {
   }, [connected, address]);
 
   return (
-    <div className="">
+    <div className="bg-black h-screen">
       <title>InJoin Dashboard</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="icon" href="https://i.imgur.com/W7K187R.png" />
@@ -85,7 +85,7 @@ const Home = (props: Props) => {
         </div>
       ) : null}
       {connected && username ? (
-        <div>
+        <div className="bg-black">
           <MessageList username={username} />
           <ChatInput username={username} />
         </div>
