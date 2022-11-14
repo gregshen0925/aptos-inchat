@@ -66,7 +66,7 @@ const Header = ({
             }}
           >
             <button
-              className="px-2 py-2 bg-black text-white font-bold rounded-lg hover"
+              className="px-2 py-2 bg-black text-white rounded-lg hover"
               onClick={() => setInviteModalOn(true)}
             >
               Invite
@@ -80,7 +80,7 @@ const Header = ({
             }}
           >
             <button
-              className="px-2 py-2 bg-black text-white font-bold rounded-lg"
+              className="px-2 py-2 bg-black text-white rounded-lg"
               onClick={() => setInboxModalOn(true)}
             >
               Inbox

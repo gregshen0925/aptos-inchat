@@ -7,6 +7,8 @@ import ChatInput from "../../components/ChatInput";
 import { Message } from "../../typing";
 import InviteModal from "../../components/InviteModal";
 import InboxModal from "../../components/InboxModal";
+import { AptosClient, TokenClient } from "aptos";
+import Register from "../../components/Register";
 
 type Props = {
   messages: Message[];
@@ -17,12 +19,40 @@ const Home = ({ messages }: Props) => {
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
+  const [registerModalOn, setRegisterModalOn] = useState<boolean>(false);
   const { account, connected, wallet: currentWallet } = useWallet();
+  const [registered, setRegistered] = useState<number>(0);
 
   useEffect(() => {
     setAddress(account?.address?.toString());
     console.log(account);
   }, [connected]);
+
+  useEffect(() => {
+    if (!connected) {
+      return;
+    }
+    const checkIfRegistered = async () => {
+      const client = new AptosClient(
+        "https://fullnode.mainnet.aptoslabs.com/v1"
+      );
+      // const client = new AptosClient("https://fullnode.devnet.aptoslabs.com/v1")
+
+      const user_minted = await client
+        .getTableItem("mpu_handle", {
+          key_type: "address",
+          value_type: "u64",
+          key: address,
+        })
+        .then((mintedAmount) => mintedAmount)
+        .catch(() => 0);
+
+      // setRegistered(user_minted);
+      console.log(user_minted);
+    };
+
+    checkIfRegistered();
+  }, [connected, account]);
 
   return (
     <div className="">
@@ -38,6 +68,12 @@ const Home = ({ messages }: Props) => {
         <InviteModal setInviteModalOn={setInviteModalOn} />
       ) : null}
       {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
+
+      {connected && !registered ? (
+        <div className="flex justify-center">
+          <Register />
+        </div>
+      ) : null}
       {connected ? (
         <div>
           <MessageList initialMessages={messages} />

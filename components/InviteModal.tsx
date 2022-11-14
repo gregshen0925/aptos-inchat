@@ -11,6 +11,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
     setInviteModalOn(false);
   };
   useOnClickOutside(clickOutsideRef, clickOutsidehandler);
+
   return (
     <div className="bg-opacity-80 backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed flex items-center justify-center z-50 w-full md:inset-0 h-modal md:h-full">
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
