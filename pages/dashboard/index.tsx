@@ -21,43 +21,48 @@ const Home = ({ messages }: Props) => {
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
   const [registerModalOn, setRegisterModalOn] = useState<boolean>(false);
   const { account, connected, wallet: currentWallet } = useWallet();
-  const [registered, setRegistered] = useState<number>(0);
+  const [username, setUsername] = useState<string>("");
 
   useEffect(() => {
     setAddress(account?.address?.toString());
-    console.log(account);
+    // console.log(account);
   }, [connected]);
 
   useEffect(() => {
     if (!connected) {
       return;
     }
-    const checkIfRegistered = async () => {
+    // console.log("address:", address)
+    const checkUsername = async () => {
       const client = new AptosClient(
         // "https://fullnode.mainnet.aptoslabs.com/v1"
         "https://fullnode.devnet.aptoslabs.com/v1"
       );
-      // const client = new AptosClient("https://fullnode.devnet.aptoslabs.com/v1")
-
-      const user_minted = await client
+      const username = await client
         .getTableItem(
           "0x2ff381fa3c00c286d83e16b74e21833649b473a2ed53a1a85a8d53483b133ded",
           {
             key_type: "address",
-            value_type: "u64",
+            value_type: "0x1::string::String",
             key: address,
           }
         )
-        .then((mintedAmount) => mintedAmount)
-        .catch(() => 0);
+        .then((username) => {
+          console.log(username)
+          return username
+        })
+        .catch((err) => {
+          console.log(err)
+          return ""
+        });
 
-      setRegistered(user_minted);
-      // setRegistered(1);
-      console.log(user_minted);
+      setUsername(username);
+      // setUsername(1);
+      console.log(username);
     };
 
-    checkIfRegistered();
-  }, [connected, account]);
+    checkUsername();
+  }, [connected, address]);
 
   return (
     <div className="">
@@ -68,7 +73,7 @@ const Home = ({ messages }: Props) => {
         setConnectModalOn={setConnectModalOn}
         setInviteModalOn={setInviteModalOn}
         setInboxModalOn={setInboxModalOn}
-        registered={registered}
+        username={username}
       />
       {connectModalOn ? (
         <ConnectModal setConnectModalOn={setConnectModalOn} />
@@ -78,12 +83,12 @@ const Home = ({ messages }: Props) => {
       ) : null}
       {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
 
-      {connected && !registered ? (
+      {connected && !username ? (
         <div className="flex justify-center">
-          <Register setRegistered={setRegistered} registered={registered} />
+          <Register setUsername={setUsername} username={username} />
         </div>
       ) : null}
-      {connected && registered ? (
+      {connected && username ? (
         <div>
           <MessageList initialMessages={messages} />
           <ChatInput />
