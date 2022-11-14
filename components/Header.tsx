@@ -2,13 +2,20 @@
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   setConnectModalOn: Function;
+  setInboxModalOn: Function;
+  setInviteModalOn: Function;
 };
 
-const Header = ({ setConnectModalOn }: Props) => {
+const Header = ({
+  setConnectModalOn,
+  setInboxModalOn,
+  setInviteModalOn,
+}: Props) => {
   const {
     account,
     disconnect,
@@ -20,7 +27,7 @@ const Header = ({ setConnectModalOn }: Props) => {
   return (
     <header className="sticky top-0 z-50 flex justify-between items-center p-5 sm:p-10 shadow-sm">
       <div className="flex space-x-2">
-        <Link href={"/dashboard/1"}>
+        <Link href={"/"}>
           <Image
             className="mx-2 object-contain grayscale hover:grayscale-0"
             height={10}
@@ -50,19 +57,60 @@ const Header = ({ setConnectModalOn }: Props) => {
           )}
         </div>
       </div>
-      <div>
-        <div className="button-container-1">
-          <span className="mas">
-            {connected ? "Disconnect" : "Connect Wallet"}
-          </span>
-          <button
-            onClick={() => (connected ? disconnect() : setConnectModalOn(true))}
-            type="button"
-            name="Hover"
+      {connected ? (
+        <div className="space-x-2 flex">
+          <motion.div
+            whileTap={{
+              scale: 0.8,
+              borderRadius: "100%",
+            }}
           >
-            {connected ? "Disconnect" : "Connect Wallet"}
-          </button>
+            <button
+              className="px-2 py-2 bg-black text-white font-bold rounded-lg hover"
+              onClick={() => setInviteModalOn(true)}
+            >
+              Invite
+            </button>
+          </motion.div>
+
+          <motion.div
+            whileTap={{
+              scale: 0.8,
+              borderRadius: "100%",
+            }}
+          >
+            <button
+              className="px-2 py-2 bg-black text-white font-bold rounded-lg"
+              onClick={() => setInboxModalOn(true)}
+            >
+              Inbox
+            </button>
+          </motion.div>
         </div>
+      ) : null}
+
+      <div>
+        <motion.div
+          whileTap={{
+            scale: 0.8,
+            borderRadius: "100%",
+          }}
+        >
+          <div className="button-container-1">
+            <span className="mas">
+              {connected ? "Disconnect" : "Connect Wallet"}
+            </span>
+            <button
+              onClick={() =>
+                connected ? disconnect() : setConnectModalOn(true)
+              }
+              type="button"
+              name="Hover"
+            >
+              {connected ? "Disconnect" : "Connect Wallet"}
+            </button>
+          </div>
+        </motion.div>
       </div>
     </header>
   );

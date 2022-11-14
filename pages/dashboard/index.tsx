@@ -4,26 +4,20 @@ import Header from "../../components/Header";
 import ConnectModal from "../../components/ConnectModal";
 import MessageList from "../../components/MessageList";
 import ChatInput from "../../components/ChatInput";
+import { Message } from "../../typing";
+import InviteModal from "../../components/InviteModal";
+import InboxModal from "../../components/InboxModal";
 
-type Props = {};
+type Props = {
+  messages: Message[];
+};
 
-const Home = (props: Props) => {
+const Home = ({ messages }: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
-  const {
-    autoConnect,
-    connect,
-    disconnect,
-    account,
-    wallets,
-    signAndSubmitTransaction,
-    connecting,
-    connected,
-    disconnecting,
-    wallet: currentWallet,
-    signMessage,
-    signTransaction,
-  } = useWallet();
+  const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
+  const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
+  const { account, connected, wallet: currentWallet } = useWallet();
 
   useEffect(() => {
     setAddress(account?.address?.toString());
@@ -32,13 +26,21 @@ const Home = (props: Props) => {
 
   return (
     <div className="">
-      <Header setConnectModalOn={setConnectModalOn} />
+      <Header
+        setConnectModalOn={setConnectModalOn}
+        setInviteModalOn={setInviteModalOn}
+        setInboxModalOn={setInboxModalOn}
+      />
       {connectModalOn ? (
         <ConnectModal setConnectModalOn={setConnectModalOn} />
       ) : null}
+      {inviteModalOn ? (
+        <InviteModal setInviteModalOn={setInviteModalOn} />
+      ) : null}
+      {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
       {connected ? (
         <div>
-          <MessageList />
+          <MessageList initialMessages={messages} />
           <ChatInput />
         </div>
       ) : null}
@@ -47,3 +49,13 @@ const Home = (props: Props) => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const data = await fetch(
+    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
+  ).then((res) => res.json());
+  const messages: Message[] = data.messages;
+  return {
+    props: { messages }, // will be passed to the page component as props
+  };
+}
