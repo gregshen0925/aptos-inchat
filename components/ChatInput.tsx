@@ -22,9 +22,9 @@ const ChatInput = () => {
 
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!input) return;
+    if (!input.trim()) return;
 
-    const messageToSend = input;
+    const messageToSend = input.trim();
 
     setInput("");
 

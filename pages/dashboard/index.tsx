@@ -7,7 +7,7 @@ import ChatInput from "../../components/ChatInput";
 import { Message } from "../../typing";
 import InviteModal from "../../components/InviteModal";
 import InboxModal from "../../components/InboxModal";
-import { AptosClient, TokenClient } from "aptos";
+import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 
 type Props = {
@@ -34,20 +34,25 @@ const Home = ({ messages }: Props) => {
     }
     const checkIfRegistered = async () => {
       const client = new AptosClient(
-        "https://fullnode.mainnet.aptoslabs.com/v1"
+        // "https://fullnode.mainnet.aptoslabs.com/v1"
+        "https://fullnode.devnet.aptoslabs.com/v1"
       );
       // const client = new AptosClient("https://fullnode.devnet.aptoslabs.com/v1")
 
       const user_minted = await client
-        .getTableItem("mpu_handle", {
-          key_type: "address",
-          value_type: "u64",
-          key: address,
-        })
+        .getTableItem(
+          "0x2ff381fa3c00c286d83e16b74e21833649b473a2ed53a1a85a8d53483b133ded",
+          {
+            key_type: "address",
+            value_type: "u64",
+            key: address,
+          }
+        )
         .then((mintedAmount) => mintedAmount)
         .catch(() => 0);
 
-      // setRegistered(user_minted);
+      setRegistered(user_minted);
+      // setRegistered(1);
       console.log(user_minted);
     };
 
@@ -60,6 +65,7 @@ const Home = ({ messages }: Props) => {
         setConnectModalOn={setConnectModalOn}
         setInviteModalOn={setInviteModalOn}
         setInboxModalOn={setInboxModalOn}
+        setRegistered={setRegistered}
         registered={registered}
       />
       {connectModalOn ? (
@@ -93,6 +99,6 @@ export async function getServerSideProps() {
   ).then((res) => res.json());
   const messages: Message[] = data.messages;
   return {
-    props: { messages }, // will be passed to the page component as props
+    props: { messages },
   };
 }

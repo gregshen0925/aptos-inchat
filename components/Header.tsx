@@ -9,6 +9,7 @@ type Props = {
   setConnectModalOn: Function;
   setInboxModalOn: Function;
   setInviteModalOn: Function;
+  setRegistered: Function;
   registered: number;
 };
 
@@ -16,6 +17,7 @@ const Header = ({
   setConnectModalOn,
   setInboxModalOn,
   setInviteModalOn,
+  setRegistered,
   registered,
 }: Props) => {
   const {
@@ -59,6 +61,21 @@ const Header = ({
           )}
         </div>
       </div>
+      {!registered && (
+        <motion.div
+          whileTap={{
+            scale: 0.8,
+            borderRadius: "100%",
+          }}
+        >
+          <button
+            className="px-2 py-2 bg-black text-white rounded-lg hover"
+            onClick={() => setRegistered(1)}
+          >
+            Mock Register
+          </button>
+        </motion.div>
+      )}
       {connected && registered ? (
         <div className="space-x-2 flex">
           <motion.div

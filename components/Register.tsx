@@ -1,8 +1,44 @@
-import React from "react";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import React, { useState } from "react";
+import { Types } from "aptos";
+import { AptosClient } from "aptos";
 
 type Props = {};
 
 const Register = (props: Props) => {
+  const [input, setInput] = useState("");
+  const {
+    account,
+    signAndSubmitTransaction,
+    connected,
+    wallet: currentWallet,
+    signMessage,
+    signTransaction,
+  } = useWallet();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+  const handleRegister = async () => {
+    if (account?.address || account?.publicKey) {
+      const payload: Types.TransactionPayload = {
+        type: "entry_function_payload",
+        function:
+          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::injoin_v1::register",
+        type_arguments: [],
+        arguments: [input, "description", "https://i.imgur.com/n7kEnSq.png"],
+      };
+      const transactionRes = await signAndSubmitTransaction(
+        payload
+        // txOptions
+      );
+      const client = new AptosClient(
+        // "https://fullnode.mainnet.aptoslabs.com/v1"
+        "https://fullnode.devnet.aptoslabs.com/v1"
+      );
+      await client.waitForTransaction(transactionRes?.hash || "");
+    }
+  };
+
   return (
     <div className="max-w-3xl">
       <div className="text-xl text-center py-5 text-bold">
@@ -16,11 +52,27 @@ const Register = (props: Props) => {
           <input
             type="username"
             id="username"
+            value={input}
+            onChange={handleChange}
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="Alice"
             required={true}
           />
         </div>
+        {/* <div className="py-3">
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">
+            User Name
+          </label>
+          <input
+            type="description"
+            id="description"
+            value={input}
+            onChange={handleChange}
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            placeholder="Introduce yourself"
+            required={true}
+          />
+        </div> */}
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">
           Avatar
         </label>
@@ -29,7 +81,7 @@ const Register = (props: Props) => {
           aria-describedby="user_avatar_help"
           id="user_avatar"
           type="file"
-          required={true}
+          required={false}
         />
 
         <div className="flex items-start py-5">
@@ -55,7 +107,8 @@ const Register = (props: Props) => {
         </div>
         <div className="flex justify-center">
           <button
-            type="submit"
+            type="button"
+            onClick={handleRegister}
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Register new account
