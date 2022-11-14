@@ -34,7 +34,6 @@ const Login = (props: Props) => {
           <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-400 text-xl">
             {text}
           </span>
-          <Cursor cursorColor="#333333" />
         </div>
         {/* <div className="flex items-center p-8 animate-pulse">
           <ConnectButton setConnectModalOn={setConnectModalOn} />
@@ -42,14 +41,14 @@ const Login = (props: Props) => {
         {connectModalOn ? (
           <ConnectModal setConnectModalOn={setConnectModalOn} />
         ) : null} */}
-        <Link href={"/dashboard/"}>
-          <div className="button-container-1">
+        <div className="button-container-1">
+          <Link href={"/dashboard"}>
             <span className="mas">Enter</span>
             <button type="button" name="Hover">
               Enter
             </button>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   );
