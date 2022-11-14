@@ -42,7 +42,7 @@ const Header = ({ setConnectModalOn }: Props) => {
           </button>
         </div>
         {connected ? (
-          <p className="text-center py-1 text-sm text-[#52dc82] font-semibold">
+          <p className="text-center py-1 text-sm text-blue-400 font-semibold">
             {account?.address?.toString().substring(0, 5)}...
             {account?.address
               ?.toString()
