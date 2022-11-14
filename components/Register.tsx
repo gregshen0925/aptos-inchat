@@ -40,7 +40,10 @@ const Register = ({ username, setUsername }: Props) => {
         // "https://fullnode.mainnet.aptoslabs.com/v1"
         "https://fullnode.devnet.aptoslabs.com/v1"
       );
-      await client.waitForTransaction(transactionRes?.hash || "");
+      await client.waitForTransaction(transactionRes?.hash || "").then((re) => {
+        console.log(re);
+        setUsername(input);
+      });
     }
   };
 
