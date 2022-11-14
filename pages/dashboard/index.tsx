@@ -7,7 +7,7 @@ import ChatInput from "../../components/ChatInput";
 
 type Props = {};
 
-const DashBoard = (props: Props) => {
+const Home = (props: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
   const {
@@ -46,4 +46,4 @@ const DashBoard = (props: Props) => {
   );
 };
 
-export default DashBoard;
+export default Home;

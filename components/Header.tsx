@@ -3,14 +3,19 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import Login from "./LogIn";
 
 type Props = {
   setConnectModalOn: Function;
 };
 
 const Header = ({ setConnectModalOn }: Props) => {
-  const { account, disconnect, connected, wallet: currentWallet } = useWallet();
+  const {
+    account,
+    disconnect,
+    connected,
+    connecting,
+    wallet: currentWallet,
+  } = useWallet();
 
   return (
     <header className="sticky top-0 z-50 flex justify-between items-center p-5 sm:p-10 shadow-sm">
@@ -27,11 +32,11 @@ const Header = ({ setConnectModalOn }: Props) => {
         <div>
           {account ? (
             <div>
-              <p className="text-blue-400">Logged in as:</p>
-
-              <p className="font-bold text-lg">
+              <p className="text-blue-400 font-bold">Logged in as:</p>
+              <p className="font-bold text-sm">
                 <p className="text-center py-1 text-sm text-blue-400 font-semibold"></p>
-                {account?.address?.toString().substring(0, 5)}...
+                {account?.address?.toString().substring(0, 5)}
+                {connecting ? <div>Loading...</div> : <span>...</span>}
                 {account?.address
                   ?.toString()
                   .substring(
@@ -41,7 +46,7 @@ const Header = ({ setConnectModalOn }: Props) => {
               </p>
             </div>
           ) : (
-            <div>Login first</div>
+            <div className="text-blue-400 font-bold text-lg">Login first</div>
           )}
         </div>
       </div>
