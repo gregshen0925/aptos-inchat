@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
-import { Link } from "next/link";
+import Link from "next/link";
 
 type Props = {};
 
