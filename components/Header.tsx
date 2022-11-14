@@ -9,7 +9,6 @@ type Props = {
   setConnectModalOn: Function;
   setInboxModalOn: Function;
   setInviteModalOn: Function;
-  setRegistered: Function;
   registered: number;
 };
 
@@ -17,7 +16,6 @@ const Header = ({
   setConnectModalOn,
   setInboxModalOn,
   setInviteModalOn,
-  setRegistered,
   registered,
 }: Props) => {
   const {
@@ -43,7 +41,7 @@ const Header = ({
         <div>
           {account ? (
             <div>
-              <p className="text-blue-400 font-bold">Logged in as:</p>
+              <p className="text-blue-400 font-bold">Aptos InJoin</p>
               <p className="font-bold text-sm">
                 <p className="text-center py-1 text-sm text-blue-400 font-semibold"></p>
                 {account?.address?.toString().substring(0, 5)}
@@ -57,25 +55,11 @@ const Header = ({
               </p>
             </div>
           ) : (
-            <div className="text-blue-400 font-bold text-lg">Login first</div>
+            <div className="text-blue-400 font-bold text-lg">Aptos InJoin</div>
           )}
         </div>
       </div>
-      {!registered && (
-        <motion.div
-          whileTap={{
-            scale: 0.8,
-            borderRadius: "100%",
-          }}
-        >
-          <button
-            className="px-2 py-2 bg-black text-white rounded-lg hover"
-            onClick={() => setRegistered(1)}
-          >
-            Mock Register
-          </button>
-        </motion.div>
-      )}
+
       {connected && registered ? (
         <div className="space-x-2 flex">
           <motion.div

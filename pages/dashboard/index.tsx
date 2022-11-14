@@ -65,7 +65,6 @@ const Home = ({ messages }: Props) => {
         setConnectModalOn={setConnectModalOn}
         setInviteModalOn={setInviteModalOn}
         setInboxModalOn={setInboxModalOn}
-        setRegistered={setRegistered}
         registered={registered}
       />
       {connectModalOn ? (
@@ -78,7 +77,7 @@ const Home = ({ messages }: Props) => {
 
       {connected && !registered ? (
         <div className="flex justify-center">
-          <Register />
+          <Register setRegistered={setRegistered} registered={registered} />
         </div>
       ) : null}
       {connected && registered ? (

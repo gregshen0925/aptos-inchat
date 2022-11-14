@@ -2,10 +2,14 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
 import { Types } from "aptos";
 import { AptosClient } from "aptos";
+import { motion } from "framer-motion";
 
-type Props = {};
+type Props = {
+  registered: number;
+  setRegistered: Function;
+};
 
-const Register = (props: Props) => {
+const Register = ({ registered, setRegistered }: Props) => {
   const [input, setInput] = useState("");
   const {
     account,
@@ -41,6 +45,23 @@ const Register = (props: Props) => {
 
   return (
     <div className="max-w-3xl">
+      <div className="flex justify-center pt-5">
+        {connected && !registered ? (
+          <motion.div
+            whileTap={{
+              scale: 0.8,
+              borderRadius: "100%",
+            }}
+          >
+            <button
+              className="px-2 py-2 bg-black text-white rounded-lg hover:bg-gray-800"
+              onClick={() => setRegistered(1)}
+            >
+              Mock Register
+            </button>
+          </motion.div>
+        ) : null}
+      </div>
       <div className="text-xl text-center py-5 text-bold">
         Register Your Account First!
       </div>
