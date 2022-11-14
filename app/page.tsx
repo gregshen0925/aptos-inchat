@@ -1,6 +1,6 @@
+"use client";
 import React from "react";
 import "../styles/styles.css";
-import "../styles/globals.css";
 // import { AptosWalletProvider } from "../context/AptosWalletProvider";
 import Login from "../components/Login";
 
