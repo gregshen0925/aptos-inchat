@@ -27,7 +27,9 @@ const Home = (props: Props) => {
   const [walletInfoModalOn, setWalletInfoModalOn] = useState<boolean>(false);
 
   useEffect(() => {
+    setLoading(true);
     setAddress(account?.address?.toString());
+    console.log(address);
   }, [connected, account]);
 
   useEffect(() => {
@@ -62,9 +64,9 @@ const Home = (props: Props) => {
         });
       console.log(username);
       setUsername(username);
+      setLoading(false);
     };
     getUserName();
-    setLoading(false);
   }, [connected, address, network]);
 
   return (
