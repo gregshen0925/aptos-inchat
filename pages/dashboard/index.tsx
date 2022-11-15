@@ -11,9 +11,11 @@ import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 
-type Props = {};
+type Props = {
+  messages: Message[];
+};
 
-const Home = (props: Props) => {
+const Home = ({ messages }: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
@@ -98,7 +100,7 @@ const Home = (props: Props) => {
         </div>
       ) : (
         <div className="bg-black">
-          <MessageList username={username} />
+          <MessageList username={username} initialMessage={messages} />
           <ChatInput username={username} />
         </div>
       )}
@@ -108,12 +110,12 @@ const Home = (props: Props) => {
 
 export default Home;
 
-// export async function getServerSideProps() {
-//   const data = await fetch(
-//     `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
-//   ).then((res) => res.json());
-//   const messages: Message[] = data.messages;
-//   return {
-//     props: { messages },
-//   };
-// }
+export async function getServerSideProps() {
+  const data = await fetch(
+    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
+  ).then((res) => res.json());
+  const messages: Message[] = data.messages;
+  return {
+    props: { messages },
+  };
+}
