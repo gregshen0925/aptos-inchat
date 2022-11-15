@@ -35,27 +35,13 @@ const Register = ({ username, setUsername }: Props) => {
       return;
     }
 
-    const data = await fetch("https://api.imgur.com/3/image", {
-      method: "POST",
-      body: imageToUpload,
-      // 👇 Set headers manually for single file upload
-      headers: {
-        "Authorization": "Client-ID 1fedb14dd5ee776",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setImageURI(data.link);
-      })
-      .catch((err) => console.error(err));
-
     if (account?.address || account?.publicKey) {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function:
           "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::injoin_v1::register",
         type_arguments: [],
-        arguments: [input!, "", imageURI!],
+        arguments: [input!, "", ""],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
