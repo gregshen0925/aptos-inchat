@@ -68,7 +68,7 @@ const Home = (props: Props) => {
 
   return (
     <div className="bg-black h-screen">
-      <title>InJoin Dashboard</title>
+      <title>ChatIn Dashboard</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="icon" href="https://i.imgur.com/W7K187R.png" />
       <Header
@@ -90,8 +90,13 @@ const Home = (props: Props) => {
       {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
 
       {!connected ? (
-        <div className="font-bold text-2xl sm:text-4xl text-white pt-10 text-center">
-          Please Connect Wallet First
+        <div>
+          <div className="font-bold text-2xl sm:text-4xl text-white pt-10 text-center">
+            Please Connect Wallet First
+          </div>
+          <div className="text-white text-center py-5 text-lg">
+            Reminder: Switch to devnet and get airdrop APT for gas fee
+          </div>
         </div>
       ) : loading ? (
         <div>

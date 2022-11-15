@@ -50,15 +50,15 @@ const Header = ({
           {account ? (
             <div>
               <p className="text-blue-400 font-bold text-lg sm:text-2xl">
-                Aptos InJoin
+                Aptos ChatIn
               </p>
               <p className="font-bold text-sm text-white">
                 Logged in as: {username}
               </p>
             </div>
           ) : (
-            <div className="text-blue-400 font-bold text-lg sm:text-2xl">
-              Aptos InJoin
+            <div className="text-white font-bold text-lg sm:text-2xl">
+              Aptos <span className="text-blue-400">ChatIn</span>
             </div>
           )}
         </div>

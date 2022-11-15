@@ -19,6 +19,10 @@ const InviteModal = ({ setTransferModalOn }: Props) => {
     setInput(e.target.value);
   };
 
+  const handleTransfer = async () => {
+    setTransferModalOn(false);
+  };
+
   return (
     <div className="bg-opacity-80 backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed flex items-center justify-center z-50 w-full md:inset-0 h-modal md:h-full">
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -67,6 +71,7 @@ const InviteModal = ({ setTransferModalOn }: Props) => {
               <button
                 type="submit"
                 disabled={!input}
+                onClick={handleTransfer}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
               >
