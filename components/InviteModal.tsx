@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 
 type Props = {
@@ -13,6 +13,11 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
     setInviteModalOn(false);
   };
   useOnClickOutside(clickOutsideRef, clickOutsidehandler);
+  const [input, setInput] = useState<string>("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
 
   return (
     <div className="bg-opacity-80 backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed flex items-center justify-center z-50 w-full md:inset-0 h-modal md:h-full">
@@ -45,11 +50,29 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
               Invite Someone To Your Chat
             </h3>
           </div>
-          <div className="p-6">
+          <div className="p-6 space-y-4">
             <p className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              Send request by airdrop NFT to friends and wait for acception
+              Send request to friends and wait for acception
             </p>
             {/* <ul className="my-4 space-y-3">{renderWalletConnectorGroup()}</ul> */}
+            <div className=" w-full flex space-x-2 bg-black justify-center">
+              <input
+                type="text"
+                value={input}
+                onChange={handleChange}
+                placeholder="Enter address here..."
+                className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
+                px-4 py-2 disables:opacity-50 disabled:cursor-not-allowed"
+              />
+              <button
+                type="submit"
+                disabled={!input}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+                disables:opacity-50 disabled:cursor-not-allowed"
+              >
+                Invite
+              </button>
+            </div>
           </div>
         </div>
       </div>
