@@ -6,10 +6,10 @@ import MessageList from "../../components/MessageList";
 import ChatInput from "../../components/ChatInput";
 import InviteModal from "../../components/InviteModal";
 import InboxModal from "../../components/InboxModal";
+import TransferModal from "../../components/TransferModal";
 import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
-import { Message } from "../../typing";
 
 type Props = {};
 
@@ -17,6 +17,7 @@ const Home = (props: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
+  const [transferModalOn, setTransferModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
   const { account, connected, wallet: currentWallet } = useWallet();
   const [username, setUsername] = useState<string>("");
@@ -59,11 +60,10 @@ const Home = (props: Props) => {
 
       setUsername(username);
       console.log(username);
-      setLoading(false)
+      setLoading(false);
     };
 
-    getUserName()
-
+    getUserName();
   }, [connected, address]);
 
   return (
@@ -74,6 +74,7 @@ const Home = (props: Props) => {
       <Header
         setConnectModalOn={setConnectModalOn}
         setInviteModalOn={setInviteModalOn}
+        setTransferModalOn={setTransferModalOn}
         setInboxModalOn={setInboxModalOn}
         username={username}
       />
@@ -82,6 +83,9 @@ const Home = (props: Props) => {
       ) : null}
       {inviteModalOn ? (
         <InviteModal setInviteModalOn={setInviteModalOn} />
+      ) : null}
+      {transferModalOn ? (
+        <TransferModal setTransferModalOn={setTransferModalOn} />
       ) : null}
       {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
 
@@ -99,7 +103,7 @@ const Home = (props: Props) => {
         </div>
       ) : (
         <div className="bg-black">
-          <MessageList username={username}/>
+          <MessageList username={username} />
           <ChatInput username={username} />
         </div>
       )}

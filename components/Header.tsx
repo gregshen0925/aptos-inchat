@@ -9,6 +9,7 @@ type Props = {
   setConnectModalOn: Function;
   setInboxModalOn: Function;
   setInviteModalOn: Function;
+  setTransferModalOn: Function;
   username: string;
 };
 
@@ -16,6 +17,7 @@ const Header = ({
   setConnectModalOn,
   setInboxModalOn,
   setInviteModalOn,
+  setTransferModalOn,
   username,
 }: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
@@ -77,6 +79,19 @@ const Header = ({
                   onClick={() => setInviteModalOn(true)}
                 >
                   Invite
+                </button>
+              </motion.div>
+              <motion.div
+                whileTap={{
+                  scale: 0.8,
+                  borderRadius: "100%",
+                }}
+              >
+                <button
+                  className="px-2 py-2 bg-black text-white rounded-lg border-[1px] border-white font-bold"
+                  onClick={() => setTransferModalOn(true)}
+                >
+                  Transfer
                 </button>
               </motion.div>
 
