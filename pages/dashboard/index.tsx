@@ -47,16 +47,13 @@ const Home = (props: Props) => {
         "https://fullnode.devnet.aptoslabs.com/v1"
       );
       const username = await client
-        .getTableItem(
-          "0x2ff381fa3c00c286d83e16b74e21833649b473a2ed53a1a85a8d53483b133ded",
-          {
-            key_type: "address",
-            value_type: "0x1::string::String",
-            key: address,
-          }
+        .getAccountResource(
+          address,
+          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::profile::Profile"
         )
-        .then((username) => {
-          return username;
+        .then((profile) => {
+          //@ts-ignore
+          return profile.data.username;
         })
         .catch((err) => {
           console.log(err);

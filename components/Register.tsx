@@ -39,9 +39,9 @@ const Register = ({ setUsername }: Props) => {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function:
-          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::injoin_v1::register",
+          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::chatin_v1::register",
         type_arguments: [],
-        arguments: [input!, "", path],
+        arguments: [input!, "", "", path],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
