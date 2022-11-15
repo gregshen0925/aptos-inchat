@@ -10,6 +10,7 @@ import InboxModal from "../../components/InboxModal";
 import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
+import { GetServerSideProps } from "next";
 
 type Props = {
   messages: Message[];
@@ -110,12 +111,16 @@ const Home = ({ messages }: Props) => {
 
 export default Home;
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const data = await fetch(
-    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
+    `${
+      process.env.VERCEL_URL ||
+      "http://localhost:3000" ||
+      "https://aptos-injoin.com/dashboard"
+    }/api/getMessages`
   ).then((res) => res.json());
   const messages: Message[] = data.messages;
   return {
     props: { messages },
   };
-}
+};
