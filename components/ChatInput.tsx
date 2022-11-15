@@ -26,9 +26,9 @@ const ChatInput = ({ username }: Props) => {
 
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trimStart()) return;
 
-    const messageToSend = input.trim();
+    const messageToSend = input.trimStart();
 
     setInput("");
 

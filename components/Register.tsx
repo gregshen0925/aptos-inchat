@@ -59,7 +59,7 @@ const Register = ({ username, setUsername }: Props) => {
           <input
             type="username"
             id="username"
-            value={input}
+            value={input.trimStart()}
             onChange={handleChange}
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="Alice"
@@ -102,7 +102,8 @@ const Register = ({ username, setUsername }: Props) => {
           <button
             type="button"
             onClick={handleRegister}
-            className="text-white focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+            className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 disables:opacity-50 disabled:cursor-not-allowed"
+            disabled={!username.trimStart()}
           >
             Register new account
           </button>

@@ -10,6 +10,7 @@
     "@solana/web3.js": "^1.66.2",
     "encoding": "^0.1.13",
     "framer-motion": "^7.6.6",
+    "imgur": "^2.2.0",
     "ioredis": "^5.2.4",
     "next": "latest",
     "pusher": "^5.1.1-beta",
