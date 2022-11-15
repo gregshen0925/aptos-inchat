@@ -15,6 +15,7 @@
     "pusher": "^5.1.1-beta",
     "pusher-js": "^7.4.1",
     "react": "18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
     "react-simple-typewriter": "^4.0.5",
     "supports-color": "^9.2.3",

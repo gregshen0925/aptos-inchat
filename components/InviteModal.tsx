@@ -29,7 +29,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
         <div
           ref={clickOutsideRef}
-          className="relative bg-black rounded-lg shadow dark:bg-black-700 border-[1px] border-white overflow-y-scroll"
+          className="relative bg-black rounded-2xl shadow dark:bg-black-700  overflow-y-scroll"
         >
           <button
             onClick={() => setInviteModalOn(false)}
@@ -63,7 +63,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
             <div className=" w-full flex space-x-2 bg-black justify-center">
               <input
                 type="text"
-                value={input}
+                value={input.trim()}
                 onChange={handleChange}
                 placeholder="Enter address here..."
                 className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
@@ -72,7 +72,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
               <button
                 type="submit"
                 onClick={handleInvite}
-                disabled={!input}
+                disabled={!input.trim()}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
               >

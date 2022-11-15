@@ -65,7 +65,7 @@ const index = ({ setConnectModalOn }: Props) => {
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
         <div
           ref={clickOutsideRef}
-          className="relative rounded-lg shadow bg-black border-[1px] border-white overflow-y-scroll"
+          className="relative rounded-2xl shadow bg-black overflow-y-scroll"
         >
           <button
             onClick={() => setConnectModalOn(false)}

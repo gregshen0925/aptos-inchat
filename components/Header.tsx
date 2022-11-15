@@ -1,5 +1,8 @@
 "use client";
-import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import {
+  useWallet,
+  WalletAdapterNetwork,
+} from "@manahippo/aptos-wallet-adapter";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -10,6 +13,7 @@ type Props = {
   setInboxModalOn: Function;
   setInviteModalOn: Function;
   setTransferModalOn: Function;
+  setWalletInfoModalOn: Function;
   username: string;
 };
 
@@ -18,6 +22,7 @@ const Header = ({
   setInboxModalOn,
   setInviteModalOn,
   setTransferModalOn,
+  setWalletInfoModalOn,
   username,
 }: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
@@ -26,12 +31,13 @@ const Header = ({
     disconnect,
     connected,
     connecting,
+    network,
     wallet: currentWallet,
   } = useWallet();
+  const notification: string = "Switch to devnet";
 
   useEffect(() => {
     setAddress(account?.address?.toString());
-    // console.log(account);
   }, [connected, account]);
 
   return (
@@ -75,7 +81,7 @@ const Header = ({
                 }}
               >
                 <button
-                  className="px-2 py-2 bg-black text-white rounded-lg border-[1px] border-white font-bold"
+                  className="px-2 py-2 bg-gray-700 text-white rounded-lg font-bold"
                   onClick={() => setInviteModalOn(true)}
                 >
                   Invite
@@ -88,7 +94,7 @@ const Header = ({
                 }}
               >
                 <button
-                  className="px-2 py-2 bg-black text-white rounded-lg border-[1px] border-white font-bold"
+                  className="px-2 py-2 bg-gray-700 text-white rounded-lg font-bold"
                   onClick={() => setTransferModalOn(true)}
                 >
                   Transfer
@@ -102,7 +108,7 @@ const Header = ({
                 }}
               >
                 <button
-                  className="px-2 py-2 bg-black text-white rounded-lg border-[1px] border-white font-bold"
+                  className="px-2 py-2 bg-gray-700 text-white rounded-lg font-bold"
                   onClick={() => setInboxModalOn(true)}
                 >
                   Inbox
@@ -120,16 +126,32 @@ const Header = ({
           >
             <div className="button-container-1">
               <span className="mas">
-                {connected ? "Disconnect" : "Connect Wallet"}
+                {`${
+                  connected
+                    ? network?.name?.toString() == "Devnet"
+                      ? network?.name
+                      : "Wrong Network"
+                    : "Connect Wallet"
+                }`}
               </span>
               <button
                 onClick={() =>
-                  connected ? disconnect() : setConnectModalOn(true)
+                  connected
+                    ? setWalletInfoModalOn(true)
+                    : setConnectModalOn(true)
                 }
                 type="button"
                 name="Hover"
               >
-                {connected ? "Disconnect" : "Connect Wallet"}
+                <div>
+                  {`${
+                    connected
+                      ? network?.name?.toString() == "Devnet"
+                        ? network?.name
+                        : "Wrong Network"
+                      : "Connect Wallet"
+                  }`}
+                </div>
               </button>
             </div>
           </motion.div>

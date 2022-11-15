@@ -18,7 +18,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
         <div
           ref={clickOutsideRef}
-          className="relative bg-black rounded-lg shadow dark:bg-black-700 border-[1px] border-white overflow-y-scroll"
+          className="relative bg-black rounded-2xl shadow dark:bg-black-700  overflow-y-scroll"
         >
           <button
             onClick={() => setInboxModalOn(false)}

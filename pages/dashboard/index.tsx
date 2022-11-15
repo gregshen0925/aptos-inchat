@@ -10,6 +10,7 @@ import TransferModal from "../../components/TransferModal";
 import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
+import WalletInfoModal from "../../components/WalletInfoModal";
 
 type Props = {};
 
@@ -19,22 +20,23 @@ const Home = (props: Props) => {
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [transferModalOn, setTransferModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
-  const { account, connected, wallet: currentWallet } = useWallet();
+  const { account, connected, wallet: currentWallet, network } = useWallet();
   const [username, setUsername] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [walletInfoModalOn, setWalletInfoModalOn] = useState<boolean>(false);
 
   useEffect(() => {
     setAddress(account?.address?.toString());
-    // console.log(account);
   }, [connected]);
 
   useEffect(() => {
     // check if connected
-    if (!connected || !address) {
+    if (!connected || !address || !(network?.name?.toString() == "Devnet")) {
+      console.log(network?.name);
+      setLoading(true);
       return;
     }
     // setLoading
-    setLoading(true);
     // check if registered
     const getUserName = async () => {
       const client = new AptosClient(
@@ -59,12 +61,11 @@ const Home = (props: Props) => {
         });
 
       setUsername(username);
-      console.log(username);
       setLoading(false);
     };
 
     getUserName();
-  }, [connected, address]);
+  }, [connected, address, network]);
 
   return (
     <div className="bg-black h-screen">
@@ -76,6 +77,7 @@ const Home = (props: Props) => {
         setInviteModalOn={setInviteModalOn}
         setTransferModalOn={setTransferModalOn}
         setInboxModalOn={setInboxModalOn}
+        setWalletInfoModalOn={setWalletInfoModalOn}
         username={username}
       />
       {connectModalOn ? (
@@ -88,10 +90,18 @@ const Home = (props: Props) => {
         <TransferModal setTransferModalOn={setTransferModalOn} />
       ) : null}
       {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
+      {walletInfoModalOn ? (
+        <WalletInfoModal setWalletInfoModalOn={setWalletInfoModalOn} />
+      ) : null}
+      {network && !(network.name?.toString() == "Devnet") && (
+        <div className="text-white text-center font-bold pt-10">
+          Change Your Network!
+        </div>
+      )}
 
       {!connected ? (
         <div>
-          <div className="font-bold text-2xl sm:text-4xl text-white pt-10 text-center">
+          <div className="font-bold text-2xl sm:text-3xl text-white pt-10 text-center">
             Please Connect Wallet First
           </div>
           <div className="text-white text-center py-5 text-lg">
