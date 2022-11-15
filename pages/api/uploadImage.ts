@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import client from "../../clients/imgur";
 
 type Data = {
   imageURI: string;
@@ -17,5 +18,9 @@ export default async function handler(
     return;
   }
 
-  // res.status(200).json({ message: newMessage });
+  const { imageToUpload } = req.body;
+
+  const data = await client.upload(imageToUpload);
+
+  res.status(200).json({ imageURI: data.data.link });
 }

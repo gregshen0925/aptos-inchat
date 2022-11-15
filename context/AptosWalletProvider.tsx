@@ -24,7 +24,7 @@ export const AptosWalletProvider: FC<WalletProvider> = ({ children }) => {
     () => [
       new BloctoWalletAdapter({
         network: WalletAdapterNetwork.Mainnet,
-        bloctoAppId: "Aptos ChatIn",
+        bloctoAppId: "Aptos Chatin",
       }),
       new MartianWalletAdapter(),
       new AptosWalletAdapter(),

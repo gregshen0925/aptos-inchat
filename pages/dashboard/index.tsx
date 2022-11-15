@@ -27,6 +27,7 @@ const Home = (props: Props) => {
 
   useEffect(() => {
     setAddress(account?.address?.toString());
+    console.log(address);
   }, [connected]);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const Home = (props: Props) => {
       setLoading(true);
       return;
     }
-    // setLoading
+    setLoading(true);
     // check if registered
     const getUserName = async () => {
       const client = new AptosClient(
@@ -59,17 +60,16 @@ const Home = (props: Props) => {
           console.log(err);
           return "";
         });
-
+      console.log(username);
       setUsername(username);
-      setLoading(false);
     };
-
     getUserName();
+    setLoading(false);
   }, [connected, address, network]);
 
   return (
     <div className="bg-black h-screen">
-      <title>ChatIn Dashboard</title>
+      <title>Chatin Dashboard</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="icon" href="https://i.imgur.com/W7K187R.png" />
       <Header

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { clientPusher } from "../pusher";
+import { clientPusher } from "../clients/pusher";
 import { Message } from "../typing";
 import fetcher from "../utils/fetchMessages";
 import Loading from "./Loading";
@@ -44,15 +44,17 @@ const MessageList = ({ username }: Props) => {
 
   return (
     <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto bg-gray-800 h-screen rounded-2xl">
-      {messages?(
-      messages?.map((message) => (
-        <MessageComponent
-          key={message.id}
-          message={message}
-          username={username}
-        />
-      ))
-      ):<Loading/>}
+      {messages ? (
+        messages?.map((message) => (
+          <MessageComponent
+            key={message.id}
+            message={message}
+            username={username}
+          />
+        ))
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 };

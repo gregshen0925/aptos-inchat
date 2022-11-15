@@ -1,5 +1,4 @@
 "use client";
-
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
 import { Types } from "aptos";
@@ -11,7 +10,9 @@ type Props = {
 };
 
 const Register = ({ username, setUsername }: Props) => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
+  const [imageToUpload, setImageToUpload] = useState<any>();
+  const [imageURI, setImageURI] = useState<string>();
   const {
     account,
     signAndSubmitTransaction,
@@ -23,14 +24,38 @@ const Register = ({ username, setUsername }: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImageToUpload(e.target.files[0]);
+    }
+  };
   const handleRegister = async () => {
+    // upload image to imgur and get uri
+    if (!imageToUpload) {
+      return;
+    }
+
+    const data = await fetch("https://api.imgur.com/3/image", {
+      method: "POST",
+      body: imageToUpload,
+      // 👇 Set headers manually for single file upload
+      headers: {
+        "Authorization": "Client-ID 1fedb14dd5ee776",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setImageURI(data.link);
+      })
+      .catch((err) => console.error(err));
+
     if (account?.address || account?.publicKey) {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function:
           "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::injoin_v1::register",
         type_arguments: [],
-        arguments: [input, "", "https://i.imgur.com/n7kEnSq.png"],
+        arguments: [input!, "", imageURI!],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
@@ -71,18 +96,16 @@ const Register = ({ username, setUsername }: Props) => {
         </label>
         <input
           className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-          aria-describedby="user_avatar_help"
-          id="user_avatar"
+          onChange={handleFileChange}
           type="file"
-          required={false}
+          required={true}
         />
 
-        <div className="flex items-start py-5">
+        {/* <div className="flex items-start py-5">
           <div className="flex items-center h-5">
             <input
               id="terms"
               type="checkbox"
-              value=""
               className="w-4 h-4 rounded border  focus:ring-3 focus:ring-blue-300 bg-gray-700 border-gray-600 dark:focus:ring-blue-600 ring-offset-gray-800"
               required={true}
             />
@@ -97,15 +120,18 @@ const Register = ({ username, setUsername }: Props) => {
               terms and conditions
             </a>
           </label>
-        </div>
-        <div className="flex justify-center">
+        </div> */}
+        <div className="flex justify-center py-5">
           <button
             type="button"
             onClick={handleRegister}
-            className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 disables:opacity-50 disabled:cursor-not-allowed"
-            disabled={!username.trimStart()}
+            className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 disabled:cursor-not-allowed"
+            disabled={
+              !input.trimStart()
+              // || !imageToUpload
+            }
           >
-            Register new account
+            Register
           </button>
         </div>
       </form>
