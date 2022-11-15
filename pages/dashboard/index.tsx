@@ -46,25 +46,29 @@ const Home = (props: Props) => {
         // "https://fullnode.mainnet.aptoslabs.com/v1"
         "https://fullnode.testnet.aptoslabs.com"
       );
-      const username = await client
+      await client
         .getAccountResource(
           address,
           "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::profile::Profile"
         )
         .then((profile) => {
           //@ts-ignore
-          return profile.data.username;
+          setUsername(profile.data.username);
+          //@ts-ignore
+          setAvatar("https://ipfs.io/ipfs/" + profile.data.avatar);
         })
         .catch((err) => {
           console.log(err);
-          return "";
+          setUsername("")
+          setAvatar("");
         });
-      console.log(username);
-      setUsername(username);
-      setLoading(false);
-    };
-    getUserName();
-  }, [connected, address, network]);
+        setLoading(false);
+      };
+      getUserName();
+    }, [connected, address, network]);
+
+    // console.log(username);
+    // console.log(avatar);
 
   return (
     <div className="bg-black h-screen">
