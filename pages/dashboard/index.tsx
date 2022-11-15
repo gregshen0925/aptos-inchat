@@ -9,6 +9,7 @@ import InboxModal from "../../components/InboxModal";
 import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
+import { Message } from "../../typing";
 
 type Props = {};
 
@@ -34,7 +35,7 @@ const Home = (props: Props) => {
     // setLoading
     setLoading(true);
     // check if registered
-    const checkUsername = async () => {
+    const getUserName = async () => {
       const client = new AptosClient(
         // "https://fullnode.mainnet.aptoslabs.com/v1"
         "https://fullnode.devnet.aptoslabs.com/v1"
@@ -58,9 +59,11 @@ const Home = (props: Props) => {
 
       setUsername(username);
       console.log(username);
-      setLoading(false);
+      setLoading(false)
     };
-    checkUsername();
+
+    getUserName()
+
   }, [connected, address]);
 
   return (
@@ -96,7 +99,7 @@ const Home = (props: Props) => {
         </div>
       ) : (
         <div className="bg-black">
-          <MessageList username={username} />
+          <MessageList username={username}/>
           <ChatInput username={username} />
         </div>
       )}
