@@ -3,12 +3,14 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type Props = {
   setWalletInfoModalOn: Function;
+  avatar?: string;
 };
 
-const InboxModal = ({ setWalletInfoModalOn }: Props) => {
+const InboxModal = ({ avatar, setWalletInfoModalOn }: Props) => {
   const clickOutsideRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState<boolean>(false);
   const {
@@ -58,6 +60,15 @@ const InboxModal = ({ setWalletInfoModalOn }: Props) => {
           </button>
 
           <div className="py-4 px-6 rounded-t border-b dark:border-gray-800">
+            <div className="flex justify-center p-5">
+              <Image
+                className=" object-contain bg-white rounded-full p-2"
+                height={100}
+                width={100}
+                src={avatar!}
+                alt="Profile Picture"
+              />
+            </div>
             <h3 className="text-base font-semibold text-gray-900 lg:text-2xl dark:text-white text-center">
               {account?.address?.toString().substring(0, 5) +
                 "..." +

@@ -14,7 +14,7 @@ type Props = {
   setInviteModalOn: Function;
   setTransferModalOn: Function;
   setWalletInfoModalOn: Function;
-  username: string;
+  username?: string;
 };
 
 const Header = ({

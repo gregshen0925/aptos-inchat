@@ -5,5 +5,5 @@ export type Message = {
   username: string;
   userAddress?: string;
   profilePic: string;
-  email: string;
+  email?: string;
 };

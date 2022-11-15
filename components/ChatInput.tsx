@@ -9,9 +9,10 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 type Props = {
   username: string;
+  avatar?: string;
 };
 
-const ChatInput = ({ username }: Props) => {
+const ChatInput = ({ avatar, username }: Props) => {
   const [input, setInput] = useState("");
   const { account, disconnect, connected, wallet: currentWallet } = useWallet();
   const {
@@ -39,9 +40,7 @@ const ChatInput = ({ username }: Props) => {
       message: messageToSend,
       create_at: Date.now(),
       username: username,
-      profilePic:
-        "https://img.alicdn.com/i4/915359562/O1CN01guaZX42KVRqA3OD2o_!!915359562.jpg_q50s50.jpg",
-      email: "elonmusk@elon.musk",
+      profilePic: avatar!,
     };
 
     const uploadMessageToUpstash = async () => {

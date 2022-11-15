@@ -12,6 +12,7 @@
     "framer-motion": "^7.6.6",
     "imgur": "^2.2.0",
     "ioredis": "^5.2.4",
+    "ipfs-http-client": "^59.0.0",
     "next": "latest",
     "pusher": "^5.1.1-beta",
     "pusher-js": "^7.4.1",

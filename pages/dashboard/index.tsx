@@ -22,13 +22,13 @@ const Home = (props: Props) => {
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
   const { account, connected, wallet: currentWallet, network } = useWallet();
   const [username, setUsername] = useState<string>("");
+  const [avatar, setAvatar] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [walletInfoModalOn, setWalletInfoModalOn] = useState<boolean>(false);
 
   useEffect(() => {
     setAddress(account?.address?.toString());
-    console.log(address);
-  }, [connected]);
+  }, [connected, account]);
 
   useEffect(() => {
     // check if connected
@@ -91,7 +91,10 @@ const Home = (props: Props) => {
       ) : null}
       {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
       {walletInfoModalOn ? (
-        <WalletInfoModal setWalletInfoModalOn={setWalletInfoModalOn} />
+        <WalletInfoModal
+          setWalletInfoModalOn={setWalletInfoModalOn}
+          avatar={avatar}
+        />
       ) : null}
       {network && !(network.name?.toString() == "Devnet") && (
         <div className="text-white text-center font-bold pt-10">
@@ -104,9 +107,6 @@ const Home = (props: Props) => {
           <div className="font-bold text-2xl sm:text-3xl text-white pt-10 text-center">
             Please Connect Wallet First
           </div>
-          <div className="text-white text-center py-5 text-lg">
-            Reminder: Switch to devnet and get airdrop APT for gas fee
-          </div>
         </div>
       ) : loading ? (
         <div>
@@ -114,12 +114,12 @@ const Home = (props: Props) => {
         </div>
       ) : !username ? (
         <div className="flex justify-center">
-          <Register setUsername={setUsername} username={username} />
+          <Register setUsername={setUsername} />
         </div>
       ) : (
         <div className="bg-black">
           <MessageList username={username} />
-          <ChatInput username={username} />
+          <ChatInput username={username} avatar={avatar} />
         </div>
       )}
     </div>

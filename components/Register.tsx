@@ -3,16 +3,15 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
 import { Types } from "aptos";
 import { AptosClient } from "aptos";
+import { uploadAssetToIpfs } from "../utils/uploadIPFS";
 
 type Props = {
-  username: string;
   setUsername: Function;
 };
 
-const Register = ({ username, setUsername }: Props) => {
+const Register = ({ setUsername }: Props) => {
   const [input, setInput] = useState<string>("");
-  const [imageToUpload, setImageToUpload] = useState<any>();
-  const [imageURI, setImageURI] = useState<string>();
+  const [imageToUpload, setImageToUpload] = useState<File>();
   const {
     account,
     signAndSubmitTransaction,
@@ -30,10 +29,11 @@ const Register = ({ username, setUsername }: Props) => {
     }
   };
   const handleRegister = async () => {
-    // upload image to imgur and get uri
     if (!imageToUpload) {
       return;
     }
+
+    const { path } = await uploadAssetToIpfs(imageToUpload);
 
     if (account?.address || account?.publicKey) {
       const payload: Types.TransactionPayload = {
@@ -41,7 +41,7 @@ const Register = ({ username, setUsername }: Props) => {
         function:
           "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::injoin_v1::register",
         type_arguments: [],
-        arguments: [input!, "", ""],
+        arguments: [input!, "", path],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
