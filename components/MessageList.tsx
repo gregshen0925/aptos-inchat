@@ -9,10 +9,9 @@ import MessageComponent from "./MessageComponent";
 
 type Props = {
   username: string;
-  initialMessage: Message[];
 };
 
-const MessageList = ({ initialMessage, username }: Props) => {
+const MessageList = ({ username }: Props) => {
   const {
     data: messages,
     error,
@@ -44,7 +43,7 @@ const MessageList = ({ initialMessage, username }: Props) => {
 
   return (
     <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto bg-gray-800 h-screen rounded-2xl">
-      {(messages || initialMessage).map((message) => (
+      {messages?.map((message) => (
         <MessageComponent
           key={message.id}
           message={message}

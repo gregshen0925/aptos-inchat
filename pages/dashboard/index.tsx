@@ -4,24 +4,19 @@ import Header from "../../components/Header";
 import ConnectModal from "../../components/ConnectModal";
 import MessageList from "../../components/MessageList";
 import ChatInput from "../../components/ChatInput";
-import { Message } from "../../typing";
 import InviteModal from "../../components/InviteModal";
 import InboxModal from "../../components/InboxModal";
 import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
-import { GetServerSideProps } from "next";
 
-type Props = {
-  // messages: Message[];
-};
+type Props = {};
 
-const Home = async (props: Props) => {
+const Home = (props: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
-  const [registerModalOn, setRegisterModalOn] = useState<boolean>(false);
   const { account, connected, wallet: currentWallet } = useWallet();
   const [username, setUsername] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -68,12 +63,6 @@ const Home = async (props: Props) => {
     checkUsername();
   }, [connected, address]);
 
-  const data = await fetch(
-    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
-  ).then((res) => res.json());
-
-  const messages: Message[] = data.messages;
-
   return (
     <div className="bg-black h-screen">
       <title>InJoin Dashboard</title>
@@ -107,7 +96,7 @@ const Home = async (props: Props) => {
         </div>
       ) : (
         <div className="bg-black">
-          <MessageList username={username} initialMessage={messages} />
+          <MessageList username={username} />
           <ChatInput username={username} />
         </div>
       )}
@@ -116,13 +105,3 @@ const Home = async (props: Props) => {
 };
 
 export default Home;
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const data = await fetch(
-//     `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
-//   ).then((res) => res.json());
-//   const messages: Message[] = data.messages;
-//   return {
-//     props: { messages },
-//   };
-// };
