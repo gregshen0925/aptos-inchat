@@ -13,10 +13,10 @@ import Loading from "../../components/Loading";
 import { GetServerSideProps } from "next";
 
 type Props = {
-  messages: Message[];
+  // messages: Message[];
 };
 
-const Home = ({ messages }: Props) => {
+const Home = async (props: Props) => {
   const [address, setAddress] = useState<string | null | undefined>(null);
   const [connectModalOn, setConnectModalOn] = useState<boolean>(false);
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
@@ -68,6 +68,12 @@ const Home = ({ messages }: Props) => {
     checkUsername();
   }, [connected, address]);
 
+  const data = await fetch(
+    `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
+  ).then((res) => res.json());
+
+  const messages: Message[] = data.messages;
+
   return (
     <div className="bg-black h-screen">
       <title>InJoin Dashboard</title>
@@ -111,16 +117,12 @@ const Home = ({ messages }: Props) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const data = await fetch(
-    `${
-      process.env.VERCEL_URL ||
-      "http://localhost:3000" ||
-      "https://aptos-injoin.com/dashboard"
-    }/api/getMessages`
-  ).then((res) => res.json());
-  const messages: Message[] = data.messages;
-  return {
-    props: { messages },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const data = await fetch(
+//     `${process.env.VERCEL_URL || "http://localhost:3000"}/api/getMessages`
+//   ).then((res) => res.json());
+//   const messages: Message[] = data.messages;
+//   return {
+//     props: { messages },
+//   };
+// };
