@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { useTypewriter } from "react-simple-typewriter";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
 import Link from "next/link";
 
 type Props = {};
 
 const LogIn = (props: Props) => {
   const [text, count] = useTypewriter({
-    words: [`Perfect showcase for Aptos Token Design`],
+    words: [`Universal Profile Module Chat App`],
     delaySpeed: 500,
   });
 
@@ -20,29 +20,35 @@ const LogIn = (props: Props) => {
       >
         <div className="flex flex-col items-center">
           <img
-            className="rounded-full h-40 w-40 md:h-56 md:w-56"
+            className="rounded-full h-40 w-40 md:h-60 md:w-60"
             src="https://i.imgur.com/JiM4StH.png"
             alt=""
           />
           <img
-            className="h-15 w-30 md:h-30 md:w-80"
-            src="https://i.imgur.com/MJ9qpSV.png"
+            className="h-15 w-30 md:h-40 md:w-100"
+            src="https://i.imgur.com/5czY10w.png"
             alt=""
           />
         </div>
-        <div className="pb-10">
-          <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-400 text-xl">
+        <div className="">
+          {/* <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-400 text-2xl">
             {text}
           </span>
+          <Cursor /> */}
+          <h1 className="text-2xl md:text-5xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-300 px-10 ">
+            <span className="mr-3">{text}</span>
+            <Cursor cursorColor="#447de6" />
+          </h1>
         </div>
-        <Link href={"/dashboard"}>
-          <div className="button-container-1">
-            <span className="mas">Enter</span>
+
+        <div className="button-container-2">
+          <span className="mas1">Enter</span>
+          <Link href={"/dashboard"}>
             <button type="button" name="Hover">
-              Enter
+              <p className="text-xl sm:text-2xl animate-pulse"> Enter</p>
             </button>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
     </div>
   );
