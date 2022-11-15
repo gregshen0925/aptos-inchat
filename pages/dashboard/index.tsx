@@ -9,6 +9,7 @@ import InviteModal from "../../components/InviteModal";
 import InboxModal from "../../components/InboxModal";
 import { AptosClient } from "aptos";
 import Register from "../../components/Register";
+import Loading from "../../components/Loading";
 
 type Props = {};
 
@@ -20,6 +21,7 @@ const Home = (props: Props) => {
   const [registerModalOn, setRegisterModalOn] = useState<boolean>(false);
   const { account, connected, wallet: currentWallet } = useWallet();
   const [username, setUsername] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setAddress(account?.address?.toString());
@@ -27,10 +29,13 @@ const Home = (props: Props) => {
   }, [connected]);
 
   useEffect(() => {
+    // check if connected
     if (!connected || !address) {
       return;
     }
-    // console.log("address:", address)
+    // setLoading
+    setLoading(true);
+    // check if registered
     const checkUsername = async () => {
       const client = new AptosClient(
         // "https://fullnode.mainnet.aptoslabs.com/v1"
@@ -55,8 +60,8 @@ const Home = (props: Props) => {
 
       setUsername(username);
       console.log(username);
+      setLoading(false);
     };
-
     checkUsername();
   }, [connected, address]);
 
@@ -79,22 +84,24 @@ const Home = (props: Props) => {
       ) : null}
       {inboxModalOn ? <InboxModal setInboxModalOn={setInboxModalOn} /> : null}
 
-      {connected && !username ? (
-        <div className="flex justify-center">
-          <Register setUsername={setUsername} username={username} />
-        </div>
-      ) : null}
       {!connected ? (
         <div className="font-bold text-2xl sm:text-4xl text-white pt-10 text-center">
           Please Connect Wallet First
         </div>
-      ) : null}
-      {connected && username ? (
+      ) : loading ? (
+        <div>
+          <Loading />
+        </div>
+      ) : !username ? (
+        <div className="flex justify-center">
+          <Register setUsername={setUsername} username={username} />
+        </div>
+      ) : (
         <div className="bg-black">
           <MessageList username={username} />
           <ChatInput username={username} />
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

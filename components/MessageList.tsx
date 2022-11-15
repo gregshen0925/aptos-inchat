@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { clientPusher } from "../pusher";
 import { Message } from "../typing";
@@ -42,7 +42,7 @@ const MessageList = ({ username }: Props) => {
   }, [messages, mutate, clientPusher]);
 
   return (
-    <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto bg-slate-600 h-screen rounded-2xl">
+    <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto bg-gray-800 h-screen rounded-2xl">
       {messages?.map((message) => (
         <MessageComponent
           key={message.id}
