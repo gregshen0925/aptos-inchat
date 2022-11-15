@@ -49,7 +49,7 @@ const Register = ({ setUsername }: Props) => {
       );
       const client = new AptosClient(
         // "https://fullnode.mainnet.aptoslabs.com/v1"
-        "https://fullnode.devnet.aptoslabs.com/v1"
+        "https://fullnode.testnet.aptoslabs.com"
       );
       await client.waitForTransaction(transactionRes?.hash || "").then(() => {
         setUsername(input);

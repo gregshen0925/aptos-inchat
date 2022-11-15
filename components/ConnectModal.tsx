@@ -44,9 +44,9 @@ const index = ({ setConnectModalOn }: Props) => {
                 <div className="flex space-x-4">
                   <img className="h-8 w-8 rounded-full" src={option.icon} />
                   <div className="pt-1">{option.name}</div>
-                  {option.name == "Martian" ||
-                  option.name == "Petra" ||
-                  option.name == "Blocto" ? (
+                  {option.name === "Martian" ||
+                  option.name === "Petra" ||
+                  option.name === "Blocto" ? (
                     <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-400 rounded bg-gray-700">
                       Popular
                     </span>

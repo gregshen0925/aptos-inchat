@@ -15,7 +15,7 @@ const MessageComponent = ({ message, username }: Props) => {
   const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
-    if (message.username == username) {
+    if (message.username === username) {
       setIsUser(true);
     }
   }, [connected, account, message]);

@@ -34,7 +34,7 @@ const Home = (props: Props) => {
 
   useEffect(() => {
     // check if connected
-    if (!connected || !address || !(network?.name?.toString() == "Devnet")) {
+    if (!connected || !address || !(network?.name?.toString() === "Testnet")) {
       console.log(network?.name);
       setLoading(true);
       return;
@@ -44,7 +44,7 @@ const Home = (props: Props) => {
     const getUserName = async () => {
       const client = new AptosClient(
         // "https://fullnode.mainnet.aptoslabs.com/v1"
-        "https://fullnode.devnet.aptoslabs.com/v1"
+        "https://fullnode.testnet.aptoslabs.com"
       );
       const username = await client
         .getAccountResource(
@@ -95,7 +95,7 @@ const Home = (props: Props) => {
           avatar={avatar}
         />
       ) : null}
-      {network && !(network.name?.toString() == "Devnet") && (
+      {network && !(network.name?.toString() === "Testnet") && (
         <div className="text-white text-center font-bold pt-10">
           Change Your Network!
         </div>
