@@ -19,12 +19,11 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
   useOnClickOutside(clickOutsideRef, clickOutsidehandler);
 
   const handleConfirm = async () => {
-    if (!account?.address && !account?.publicKey) return
+    if (!account?.address && !account?.publicKey) return;
     // claim NFT
     const payload: Types.TransactionPayload = {
       type: "entry_function_payload",
-      function:
-        `${MODULE_ADDRESS}::chatin_v1::confirm`,
+      function: `${MODULE_ADDRESS}::chatin_v1::confirm`,
       type_arguments: [],
       arguments: [MODULE_ADDRESS, "Demo Chat"],
     };
@@ -36,7 +35,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
       // do something
     });
     setInboxModalOn(false);
-  }
+  };
 
   return (
     <div className="bg-opacity-80 backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed flex items-center justify-center z-50 w-full md:inset-0 h-modal md:h-full">
@@ -75,14 +74,16 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
             </p>
             {/* <ul className="my-4 space-y-3">{renderWalletConnectorGroup()}</ul> */}
           </div>
-          <button
-                type="submit"
-                onClick={handleConfirm}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+          <div className="flex justify-center p-4">
+            <button
+              type="submit"
+              onClick={handleConfirm}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl
                 disables:opacity-50 disabled:cursor-not-allowed"
-              >
-                Confirm
-          </button>
+            >
+              Confirm
+            </button>
+          </div>
         </div>
       </div>
     </div>
