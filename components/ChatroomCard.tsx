@@ -14,7 +14,7 @@ const ChatroomCard = ({ chatInfo }: Props) => {
               <img
                 className="h-100% w-100% rounded-2xl object-cover"
                 // src={"https://ipfs.io/ipfs/" + chatInfo.chatImage}
-                src={"https://i.imgur.com/n7kEnSq.png"}
+                src={"https://i.imgur.com/91OZUFF.png"}
                 alt=""
               />
             </div>

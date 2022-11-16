@@ -124,9 +124,27 @@ const Home = (props: Props) => {
       )}
 
       {!connected ? (
-        <div>
-          <div className="font-bold text-2xl sm:text-3xl text-white pt-10 text-center">
-            Please Connect Wallet First
+        <div className="flex justify-center ">
+          <div className="max-w-xl text-white  space-y-5">
+            <p className="text-3xl font-bold">
+              Aptos Profile System Created by InJoy Labs
+            </p>
+            <p className="text-xl">
+              Universal profile bound with Aptos account
+            </p>
+            <p className="text-xl">
+              Login Apps or Dapps using existing Profile
+            </p>
+            <p className="text-xl">Share the users between Apps or Dapps</p>
+            <p className="text-3xl font-bold">
+              Chat room invitation using Aptos Token (NFT)
+            </p>
+            <p className="text-xl">
+              Inviter’s inviting is like offering a token{" "}
+            </p>
+            <p className="text-xl">
+              Invitee’s confirming is like claiming a pending token offer
+            </p>
           </div>
         </div>
       ) : loading ? (
