@@ -11,7 +11,6 @@ import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
-
 type Props = {};
 
 const Home = (props: Props) => {
@@ -20,7 +19,7 @@ const Home = (props: Props) => {
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [transferModalOn, setTransferModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
-  const { account, connected, wallet: currentWallet, network } = useWallet();
+  const { account, connected, wallet: currentWallet, network,connect } = useWallet();
   const [username, setUsername] = useState<string>("");
   const [avatar, setAvatar] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -58,6 +57,7 @@ const Home = (props: Props) => {
           setUsername(profile.data.username);
           //@ts-ignore
           setAvatar("https://ipfs.io/ipfs/" + profile.data.avatar);
+          console.log(avatar)
         })
         .catch((err) => {
           console.log(err);
@@ -69,8 +69,8 @@ const Home = (props: Props) => {
     getUserName();
   }, [connected, address, network]);
 
-  // console.log(username);
-  // console.log(avatar);
+  console.log(username);
+  console.log("Avatar:",avatar);
 
   return (
     <div className="bg-black h-screen">
@@ -99,6 +99,7 @@ const Home = (props: Props) => {
         <WalletInfoModal
           setWalletInfoModalOn={setWalletInfoModalOn}
           avatar={avatar}
+          username={username}
         />
       ) : null}
       {network && !(network.name?.toString() === targetNetwork) && (
