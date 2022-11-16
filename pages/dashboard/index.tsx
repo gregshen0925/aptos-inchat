@@ -7,11 +7,11 @@ import ChatInput from "../../components/ChatInput";
 import InviteModal from "../../components/InviteModal";
 import InboxModal from "../../components/InboxModal";
 import TransferModal from "../../components/TransferModal";
-import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
 import { ChatInfo } from "../../typing";
+import { client, tokenClient, MODULE_ADDRESS } from "../../utils/aptosClient";
 
 type Props = {};
 
@@ -50,16 +50,14 @@ const Home = (props: Props) => {
     setLoading(true);
     // check if registered
     const getUserName = async () => {
-      const client = new AptosClient(
-        // "https://fullnode.mainnet.aptoslabs.com/v1"
-        "https://fullnode.testnet.aptoslabs.com"
-      );
+
       await client
         .getAccountResource(
           address,
-          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::profile::Profile"
+          `${MODULE_ADDRESS}::profile::Profile`,
         )
         .then((profile) => {
+          console.log(profile)
           //@ts-ignore
           setUsername(profile.data.username);
           //@ts-ignore
@@ -70,19 +68,26 @@ const Home = (props: Props) => {
           setUsername("");
           setAvatar("");
         });
+      await tokenClient
+        .getTokenData(
+          MODULE_ADDRESS,
+          "AptosChatinV1: Justa Liang",
+          "Demo Chat"
+        )
+        .then((tokenData) => {
+          console.log(tokenData)
+          setChatGroupToken([{
+            creator: MODULE_ADDRESS,
+            chatName: tokenData.name,
+            chatImage: tokenData.uri,
+            description: tokenData.description,
+          }])
+        })
+        .catch((err) => {
+          console.log(err)
+        });
       setLoading(false);
     };
-
-    // getChatGroupToken
-    const chatGroups: ChatInfo[] = [
-      {
-        creator: "Greg",
-        chatName: "Demo Chat",
-        chatImage: "QmUwZV67fP7HsbF4Sod6Us6zz9xDsWMca1joqmwDv3MMdY",
-        description: "This is a demo chat",
-      },
-    ];
-    setChatGroupToken(chatGroups);
 
     getUserName();
   }, [connected, address, network]);

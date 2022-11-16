@@ -1,10 +1,15 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChatInfo } from "../typing";
 
 type Props = { chatInfo: ChatInfo };
 
 const ChatroomCard = ({ chatInfo }: Props) => {
+  const [link, setLink] = useState<string>('')
+  useEffect(() => {
+
+  }, [])
+
   return (
     <div className="">
       <Link href={`/dashboard/${chatInfo.chatName}`}>
@@ -13,8 +18,11 @@ const ChatroomCard = ({ chatInfo }: Props) => {
             <div className="bg-gradient-to-br p-1 md:p-1 rounded-xl">
               <img
                 className="h-100% w-100% rounded-2xl object-cover"
-                // src={"https://ipfs.io/ipfs/" + chatInfo.chatImage}
-                src={"https://i.imgur.com/91OZUFF.png"}
+                src={chatInfo.chatImage.slice(0,4) === "http"?
+                  chatInfo.chatImage:
+                  "ipfs://ipfs.io/ipfs/" + chatInfo.chatImage
+                }
+                // src={"https://i.imgur.com/n7kEnSq.png"}
                 alt=""
               />
             </div>

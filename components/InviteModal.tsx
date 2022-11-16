@@ -2,12 +2,22 @@
 
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import { client, Types, MODULE_ADDRESS } from "../utils/aptosClient";
 
 type Props = {
   setInviteModalOn: Function;
 };
 
 const InviteModal = ({ setInviteModalOn }: Props) => {
+  const {
+    account,
+    signAndSubmitTransaction,
+    connected,
+    wallet: currentWallet,
+    signMessage,
+    signTransaction,
+  } = useWallet();
   const clickOutsideRef = useRef<HTMLDivElement>(null);
   const clickOutsidehandler = () => {
     setInviteModalOn(false);
@@ -20,7 +30,22 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
   };
 
   const handleInvite = async () => {
+    if (!account?.address && !account?.publicKey) return
     // mint NFT to someone
+    const payload: Types.TransactionPayload = {
+      type: "entry_function_payload",
+      function:
+        `${MODULE_ADDRESS}::chatin_v1::invite`,
+      type_arguments: [],
+      arguments: ["Demo Chat", input],
+    };
+    const transactionRes = await signAndSubmitTransaction(
+      payload
+      // txOptions
+    );
+    await client.waitForTransaction(transactionRes?.hash || "").then(() => {
+      // do something
+    });
     setInviteModalOn(false);
   };
 

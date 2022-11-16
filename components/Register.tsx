@@ -1,8 +1,7 @@
 "use client";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
-import { Types } from "aptos";
-import { AptosClient } from "aptos";
+import { client, Types, MODULE_ADDRESS } from "../utils/aptosClient";
 import { uploadAssetToIpfs } from "../utils/uploadIPFS";
 
 type Props = {
@@ -39,17 +38,13 @@ const Register = ({ setUsername }: Props) => {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function:
-          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::chatin_v1::register",
+          `${MODULE_ADDRESS}::chatin_v1::register`,
         type_arguments: [],
         arguments: [input!, "", "", path],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
         // txOptions
-      );
-      const client = new AptosClient(
-        // "https://fullnode.mainnet.aptoslabs.com/v1"
-        "https://fullnode.testnet.aptoslabs.com"
       );
       await client.waitForTransaction(transactionRes?.hash || "").then(() => {
         setUsername(input);

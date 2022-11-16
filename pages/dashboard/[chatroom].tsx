@@ -7,10 +7,10 @@ import ChatInput from "../../components/ChatInput";
 import InviteModal from "../../components/InviteModal";
 import InboxModal from "../../components/InboxModal";
 import TransferModal from "../../components/TransferModal";
-import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
+import { client, MODULE_ADDRESS } from "../../utils/aptosClient";
 
 type Props = {};
 
@@ -49,14 +49,10 @@ const Home = (props: Props) => {
     setLoading(true);
     // check if registered
     const getUserName = async () => {
-      const client = new AptosClient(
-        // "https://fullnode.mainnet.aptoslabs.com/v1"
-        "https://fullnode.testnet.aptoslabs.com"
-      );
       await client
         .getAccountResource(
           address,
-          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::profile::Profile"
+          `${MODULE_ADDRESS}::profile::Profile`,
         )
         .then((profile) => {
           //@ts-ignore
