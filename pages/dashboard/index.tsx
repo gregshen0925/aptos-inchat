@@ -57,7 +57,7 @@ const Home = (props: Props) => {
           `${MODULE_ADDRESS}::profile::Profile`,
         )
         .then((profile) => {
-          console.log(profile)
+          // console.log(profile)
           //@ts-ignore
           setUsername(profile.data.username);
           //@ts-ignore
@@ -75,8 +75,8 @@ const Home = (props: Props) => {
           "Demo Chat"
         )
         .then((tokenData) => {
-          console.log(tokenData)
-          console.log(tokenData.collection)
+          // console.log(tokenData)
+          // console.log(tokenData.collection)
           setChatGroupToken([{
             creator: MODULE_ADDRESS,
             collection: "AptosChatinV1: Justa Liang",

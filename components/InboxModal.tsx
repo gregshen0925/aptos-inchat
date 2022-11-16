@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import { client, Types, MODULE_ADDRESS } from "../utils/aptosClient";
 
 type Props = {
   setInboxModalOn: Function;
@@ -12,7 +14,30 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
   const clickOutsidehandler = () => {
     setInboxModalOn(false);
   };
+  const { account, signAndSubmitTransaction } = useWallet();
+
   useOnClickOutside(clickOutsideRef, clickOutsidehandler);
+
+  const handleConfirm = async () => {
+    if (!account?.address && !account?.publicKey) return
+    // claim NFT
+    const payload: Types.TransactionPayload = {
+      type: "entry_function_payload",
+      function:
+        `${MODULE_ADDRESS}::chatin_v1::confirm`,
+      type_arguments: [],
+      arguments: [MODULE_ADDRESS, "Demo Chat"],
+    };
+    const transactionRes = await signAndSubmitTransaction(
+      payload
+      // txOptions
+    );
+    await client.waitForTransaction(transactionRes?.hash || "").then(() => {
+      // do something
+    });
+    setInboxModalOn(false);
+  }
+
   return (
     <div className="bg-opacity-80 backdrop-blur-sm overflow-y-auto overflow-x-hidden fixed flex items-center justify-center z-50 w-full md:inset-0 h-modal md:h-full">
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -50,6 +75,14 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
             </p>
             {/* <ul className="my-4 space-y-3">{renderWalletConnectorGroup()}</ul> */}
           </div>
+          <button
+                type="submit"
+                onClick={handleConfirm}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+                disables:opacity-50 disabled:cursor-not-allowed"
+              >
+                Confirm
+          </button>
         </div>
       </div>
     </div>
