@@ -137,7 +137,7 @@ const Home = (props: Props) => {
               Aptos Profile System Created by InJoy Labs
             </p>
             <p className="text-xl">
-              Universal profile bound with Aptos account
+              Universal profile bonding with Aptos account
             </p>
             <p className="text-xl">
               Login Apps or Dapps using existing Profile
@@ -147,10 +147,10 @@ const Home = (props: Props) => {
               Chat room invitation using Aptos Token (NFT)
             </p>
             <p className="text-xl">
-              Inviter’s inviting is like offering a token{" "}
+              Minting a token to others is like sending invitation to chat group
             </p>
             <p className="text-xl">
-              Invitee’s confirming is like claiming a pending token offer
+              Claiming a token is like accepting invitation
             </p>
           </div>
         </div>
