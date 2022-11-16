@@ -127,24 +127,8 @@ const Home = (props: Props) => {
 
       {!connected ? (
         <div>
-          <div className="flex justify-center ">
-            <div className="max-w-xl text-white space-y-5">
-              <p className="text-4xl font-bold  text-transparent  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                What InJoy Labs is trying to do
-              </p>
-              <p className="text-xl">
-                1. Universal profile bonding with Aptos account
-              </p>
-              <p className="text-xl">
-                2. Login Apps or Dapps using existing Profile
-              </p>
-              <p className="text-xl">
-                3. Share the users between Apps or Dapps
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col items-center p-10">
-            <p className="text-3xl text-white font-bold text-transparent  bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+          <div className="flex flex-col items-center">
+            <p className="text-3xl text-white font-bold text-transparent py-10 bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
               This app combines Aptos Token Design and Universal Profile
             </p>
             <Image
