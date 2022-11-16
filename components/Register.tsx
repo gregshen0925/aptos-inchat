@@ -34,6 +34,7 @@ const Register = ({ setUsername }: Props) => {
     }
 
     const { path } = await uploadAssetToIpfs(imageToUpload);
+    console.log(path);
 
     if (account?.address || account?.publicKey) {
       const payload: Types.TransactionPayload = {

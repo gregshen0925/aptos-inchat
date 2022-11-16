@@ -9,7 +9,7 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 
 type Props = {
   username: string;
-  avatar?: string;
+  avatar: string;
 };
 
 const ChatInput = ({ avatar, username }: Props) => {

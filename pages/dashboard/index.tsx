@@ -26,6 +26,8 @@ const Home = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [walletInfoModalOn, setWalletInfoModalOn] = useState<boolean>(false);
 
+  const targetNetwork = "Testnet";
+
   useEffect(() => {
     setLoading(true);
     setAddress(account?.address?.toString());
@@ -59,16 +61,16 @@ const Home = (props: Props) => {
         })
         .catch((err) => {
           console.log(err);
-          setUsername("")
+          setUsername("");
           setAvatar("");
         });
-        setLoading(false);
-      };
-      getUserName();
-    }, [connected, address, network]);
+      setLoading(false);
+    };
+    getUserName();
+  }, [connected, address, network]);
 
-    // console.log(username);
-    // console.log(avatar);
+  // console.log(username);
+  // console.log(avatar);
 
   return (
     <div className="bg-black h-screen">
@@ -99,9 +101,9 @@ const Home = (props: Props) => {
           avatar={avatar}
         />
       ) : null}
-      {network && !(network.name?.toString() === "Testnet") && (
+      {network && !(network.name?.toString() === targetNetwork) && (
         <div className="text-white text-center font-bold pt-10">
-          Change Your Network!
+          Change Your Network to {targetNetwork}!
         </div>
       )}
 
@@ -122,7 +124,7 @@ const Home = (props: Props) => {
       ) : (
         <div className="bg-black">
           <MessageList username={username} />
-          <ChatInput username={username} avatar={avatar} />
+          <ChatInput username={username} avatar={avatar!} />
         </div>
       )}
     </div>
