@@ -1,4 +1,7 @@
-import { useWallet, WalletAdapterNetwork } from "@manahippo/aptos-wallet-adapter";
+import {
+  useWallet,
+  WalletAdapterNetwork,
+} from "@manahippo/aptos-wallet-adapter";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import ConnectModal from "../../components/ConnectModal";
@@ -35,7 +38,7 @@ const Home = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [walletInfoModalOn, setWalletInfoModalOn] = useState<boolean>(false);
 
-  const targetNetwork = WalletAdapterNetwork.Testnet
+  const targetNetwork = WalletAdapterNetwork.Testnet;
 
   useEffect(() => {
     setLoading(true);
@@ -44,7 +47,11 @@ const Home = (props: Props) => {
 
   useEffect(() => {
     // check if connected
-    if (!connected || !address || !(network?.name?.toString().toLowerCase() == targetNetwork)) {
+    if (
+      !connected ||
+      !address ||
+      !(network?.name?.toString().toLowerCase() == targetNetwork)
+    ) {
       setLoading(true);
       return;
     }
@@ -119,11 +126,12 @@ const Home = (props: Props) => {
           username={username}
         />
       ) : null}
-      {network && !(network.name?.toString().toLowerCase() == targetNetwork) && (
-        <div className="text-white text-center font-bold pt-10">
-          Change Your Network to {targetNetwork}!
-        </div>
-      )}
+      {network &&
+        !(network.name?.toString().toLowerCase() == targetNetwork) && (
+          <div className="text-white text-center font-bold pt-10">
+            Change Your Network to {targetNetwork}!
+          </div>
+        )}
 
       {!connected ? (
         <div>
