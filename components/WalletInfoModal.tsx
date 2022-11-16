@@ -4,6 +4,8 @@ import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 type Props = {
   setWalletInfoModalOn: Function;
@@ -14,6 +16,7 @@ type Props = {
 const InboxModal = ({ avatar, setWalletInfoModalOn, username }: Props) => {
   const clickOutsideRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState<boolean>(false);
+  const router = useRouter();
   const {
     account,
     disconnect,
@@ -101,6 +104,11 @@ const InboxModal = ({ avatar, setWalletInfoModalOn, username }: Props) => {
               </motion.div>
             </div>
           </div>
+
+          <Link href={`/dashboard/roomA`}>
+            <div className="text-white">room A</div>
+          </Link>
+
           <div className="flex justify-center space-x-2 p-6">
             <motion.div
               whileTap={{
@@ -112,7 +120,7 @@ const InboxModal = ({ avatar, setWalletInfoModalOn, username }: Props) => {
                 onClick={handleDisconnect}
                 className="px-2 py-2 bg-gray-600 text-sm text-white rounded-lg hover:bg-gray-500 cursor-pointer"
               >
-                Disconnect
+                Logout
               </button>
             </motion.div>
           </div>

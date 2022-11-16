@@ -11,6 +11,7 @@ import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
+
 type Props = {};
 
 const Home = (props: Props) => {
@@ -19,7 +20,13 @@ const Home = (props: Props) => {
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [transferModalOn, setTransferModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
-  const { account, connected, wallet: currentWallet, network,connect } = useWallet();
+  const {
+    account,
+    connected,
+    wallet: currentWallet,
+    network,
+    connect,
+  } = useWallet();
   const [username, setUsername] = useState<string>("");
   const [avatar, setAvatar] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -30,13 +37,11 @@ const Home = (props: Props) => {
   useEffect(() => {
     setLoading(true);
     setAddress(account?.address?.toString());
-    console.log(address);
   }, [connected, account]);
 
   useEffect(() => {
     // check if connected
     if (!connected || !address || !(network?.name?.toString() === "Testnet")) {
-      console.log(network?.name);
       setLoading(true);
       return;
     }
@@ -57,7 +62,6 @@ const Home = (props: Props) => {
           setUsername(profile.data.username);
           //@ts-ignore
           setAvatar("https://ipfs.io/ipfs/" + profile.data.avatar);
-          console.log(avatar)
         })
         .catch((err) => {
           console.log(err);
@@ -68,9 +72,6 @@ const Home = (props: Props) => {
     };
     getUserName();
   }, [connected, address, network]);
-
-  console.log(username);
-  console.log("Avatar:",avatar);
 
   return (
     <div className="bg-black h-screen">

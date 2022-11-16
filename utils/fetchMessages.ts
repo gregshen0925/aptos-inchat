@@ -1,11 +1,11 @@
 import { Message } from "../typing";
 
-const fetcher = async ()=>{
-    const res = await fetch('api/getMessages')
-    const data = await res.json()
-    const messages:Message[] = data.messages
+const fetcher = async () => {
+  const res = await fetch("/api/getMessages");
+  const data = await res.json();
+  const messages: Message[] = data.messages;
 
-    return messages
-}
+  return messages;
+};
 
-export default fetcher
+export default fetcher;

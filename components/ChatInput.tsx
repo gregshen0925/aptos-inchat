@@ -77,7 +77,7 @@ const ChatInput = ({ avatar, username }: Props) => {
       />
       <button
         type="submit"
-        disabled={!input||!avatar}
+        disabled={!input || !avatar}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
       >
