@@ -12,6 +12,7 @@ import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
 import { ChatInfo } from "../../typing";
 import { client, tokenClient, MODULE_ADDRESS } from "../../utils/aptosClient";
+import Image from "next/image";
 
 type Props = {};
 
@@ -50,12 +51,8 @@ const Home = (props: Props) => {
     setLoading(true);
     // check if registered
     const getUserName = async () => {
-
       await client
-        .getAccountResource(
-          address,
-          `${MODULE_ADDRESS}::profile::Profile`,
-        )
+        .getAccountResource(address, `${MODULE_ADDRESS}::profile::Profile`)
         .then((profile) => {
           // console.log(profile)
           //@ts-ignore
@@ -69,24 +66,22 @@ const Home = (props: Props) => {
           setAvatar("");
         });
       await tokenClient
-        .getTokenData(
-          MODULE_ADDRESS,
-          "AptosChatinV1: Justa Liang",
-          "Demo Chat"
-        )
+        .getTokenData(MODULE_ADDRESS, "AptosChatinV1: Justa Liang", "Demo Chat")
         .then((tokenData) => {
           // console.log(tokenData)
           // console.log(tokenData.collection)
-          setChatGroupToken([{
-            creator: MODULE_ADDRESS,
-            collection: "AptosChatinV1: Justa Liang",
-            chatName: tokenData.name,
-            chatImage: tokenData.uri,
-            description: tokenData.description,
-          }])
+          setChatGroupToken([
+            {
+              creator: MODULE_ADDRESS,
+              collection: "AptosChatinV1: Justa Liang",
+              chatName: tokenData.name,
+              chatImage: tokenData.uri,
+              description: tokenData.description,
+            },
+          ]);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
       setLoading(false);
     };
@@ -131,27 +126,33 @@ const Home = (props: Props) => {
       )}
 
       {!connected ? (
-        <div className="flex justify-center ">
-          <div className="max-w-xl text-white  space-y-5">
-            <p className="text-3xl font-bold">
-              Aptos Profile System Created by InJoy Labs
+        <div>
+          <div className="flex justify-center ">
+            <div className="max-w-xl text-white space-y-5">
+              <p className="text-4xl font-bold  text-transparent  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                What InJoy Labs is trying to do
+              </p>
+              <p className="text-xl">
+                1. Universal profile bonding with Aptos account
+              </p>
+              <p className="text-xl">
+                2. Login Apps or Dapps using existing Profile
+              </p>
+              <p className="text-xl">
+                3. Share the users between Apps or Dapps
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col items-center p-10">
+            <p className="text-3xl text-white font-bold text-transparent  bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+              This app combines Aptos Token Design and Universal Profile
             </p>
-            <p className="text-xl">
-              Universal profile bonding with Aptos account
-            </p>
-            <p className="text-xl">
-              Login Apps or Dapps using existing Profile
-            </p>
-            <p className="text-xl">Share the users between Apps or Dapps</p>
-            <p className="text-3xl font-bold">
-              Chat room invitation using Aptos Token (NFT)
-            </p>
-            <p className="text-xl">
-              Minting a token to others is like sending invitation to chat group
-            </p>
-            <p className="text-xl">
-              Claiming a token is like accepting invitation
-            </p>
+            <Image
+              src="https://i.imgur.com/e05wp8H.png"
+              alt="work flow"
+              width={800}
+              height={800}
+            />
           </div>
         </div>
       ) : loading ? (
