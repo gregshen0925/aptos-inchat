@@ -105,10 +105,6 @@ const InboxModal = ({ avatar, setWalletInfoModalOn, username }: Props) => {
             </div>
           </div>
 
-          <Link href={`/dashboard/roomA`}>
-            <div className="text-white">room A</div>
-          </Link>
-
           <div className="flex justify-center space-x-2 p-6">
             <motion.div
               whileTap={{

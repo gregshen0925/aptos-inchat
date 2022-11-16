@@ -11,7 +11,6 @@ import { AptosClient } from "aptos";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
-import { ChatInfo } from "../../typing";
 
 type Props = {};
 
@@ -21,7 +20,7 @@ const Home = (props: Props) => {
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [transferModalOn, setTransferModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
-  const [chatGroupToken, setChatGroupToken] = useState<ChatInfo[]>();
+  const [haveToken, setHaveToken] = useState<boolean>(false);
   const {
     account,
     connected,
@@ -72,18 +71,6 @@ const Home = (props: Props) => {
         });
       setLoading(false);
     };
-
-    // getChatGroupToken
-    const chatGroups: ChatInfo[] = [
-      {
-        creator: "Greg",
-        chatName: "Demo Chat",
-        chatImage: "QmUwZV67fP7HsbF4Sod6Us6zz9xDsWMca1joqmwDv3MMdY",
-        description: "This is a demo chat",
-      },
-    ];
-    setChatGroupToken(chatGroups);
-
     getUserName();
   }, [connected, address, network]);
 
@@ -139,12 +126,8 @@ const Home = (props: Props) => {
         </div>
       ) : (
         <div className="bg-black">
-          <MessageList
-            username={""}
-            haveToken={false}
-            chatGroupToken={chatGroupToken}
-          />
-          <ChatInput username={""} avatar={avatar!} haveToken={false} />
+          <MessageList username={username} haveToken={true} />
+          <ChatInput username={username} avatar={avatar!} haveToken={true} />
         </div>
       )}
     </div>

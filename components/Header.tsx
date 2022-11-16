@@ -49,7 +49,7 @@ const Header = ({
             height={10}
             width={50}
             src="https://i.imgur.com/n7kEnSq.png"
-            alt="Profile Picture"
+            alt="Logo"
           />
         </Link>
         <div>

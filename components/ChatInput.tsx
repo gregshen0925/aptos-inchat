@@ -10,9 +10,10 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 type Props = {
   username: string;
   avatar: string;
+  haveToken: boolean;
 };
 
-const ChatInput = ({ avatar, username }: Props) => {
+const ChatInput = ({ haveToken, avatar, username }: Props) => {
   const [input, setInput] = useState("");
   const { account, disconnect, connected, wallet: currentWallet } = useWallet();
   const {
@@ -77,7 +78,7 @@ const ChatInput = ({ avatar, username }: Props) => {
       />
       <button
         type="submit"
-        disabled={!input || !avatar}
+        disabled={!input || !avatar || !haveToken}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
       >
