@@ -48,7 +48,7 @@ const MessageList = ({ chatGroupToken, haveToken, username }: Props) => {
   }, [messages, mutate, clientPusher]);
 
   return (
-    <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto bg-gray-800 h-screen rounded-2xl">
+    <div className="space-y-5 px-5 pt-8  max-w-2xl xl:max-w-4xl mx-auto bg-gray-800  rounded-2xl">
       {haveToken ? (
         messages ? (
           messages?.map((message) => (

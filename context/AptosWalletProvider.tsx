@@ -30,7 +30,7 @@ export const AptosWalletProvider: FC<WalletProvider> = ({ children }) => {
       new AptosWalletAdapter(),
       new RiseWalletAdapter(),
       new FewchaWalletAdapter(),
-      new PontemWalletAdapter(),
+      // new PontemWalletAdapter(),
       new SpikaWalletAdapter(),
       new BitkeepWalletAdapter(),
     ],
