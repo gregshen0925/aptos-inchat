@@ -1,18 +1,38 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ChatInfo } from "../typing";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import { tokenClient } from "../utils/aptosClient";
 
 type Props = { chatInfo: ChatInfo };
 
 const ChatroomCard = ({ chatInfo }: Props) => {
-  const [link, setLink] = useState<string>('')
+  const { account } = useWallet();
+  const [chatName, setChatName] = useState<string>('')
   useEffect(() => {
-
-  }, [])
+    const getTokenForAccount = async () => {
+      if (!account || !account.address) return
+      await tokenClient.getTokenForAccount(
+        account.address,
+        {
+          token_data_id: {
+            creator: chatInfo.creator,
+            collection: chatInfo.collection,
+            name: chatInfo.chatName,
+          },
+          property_version: '0',
+        }
+      ).then((balance) => {
+        if (parseInt(balance.amount) > 0)
+          setChatName(chatInfo.chatName) 
+      })
+    }
+    getTokenForAccount()
+  }, [account, chatInfo])
 
   return (
     <div className="">
-      <Link href={`/dashboard/${chatInfo.chatName}`}>
+      <Link href={`/dashboard/${chatName}`}>
         <div className="flex flex-col items-center cursor-pointer transition-all duration-200 hover:scale-105">
           {
             <div className="bg-gradient-to-br p-1 md:p-1 rounded-xl">

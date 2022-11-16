@@ -10,6 +10,7 @@ export type Message = {
 
 export type ChatInfo = {
   creator: string;
+  collection: string;
   chatName: string;
   chatImage: string;
   description: string;

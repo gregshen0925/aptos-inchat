@@ -76,8 +76,10 @@ const Home = (props: Props) => {
         )
         .then((tokenData) => {
           console.log(tokenData)
+          console.log(tokenData.collection)
           setChatGroupToken([{
             creator: MODULE_ADDRESS,
+            collection: "AptosChatinV1: Justa Liang",
             chatName: tokenData.name,
             chatImage: tokenData.uri,
             description: tokenData.description,
