@@ -39,6 +39,7 @@ const Header = ({
 
   useEffect(() => {
     setAddress(account?.address?.toString());
+    console.log(network?.name);
   }, [connected, account]);
 
   return (
@@ -129,9 +130,7 @@ const Header = ({
               <span className="mas">
                 {`${
                   connected
-                    ? !(
-                        network?.name?.toString().toLowerCase() == targetNetwork
-                      )
+                    ? network?.name?.toString().toLowerCase() == targetNetwork
                       ? network?.name
                       : "Wrong Network"
                     : "Connect Wallet"
@@ -149,7 +148,7 @@ const Header = ({
                 <div>
                   {`${
                     connected
-                      ? network?.name?.toString() === "Testnet"
+                      ? network?.name?.toString().toLowerCase() == targetNetwork
                         ? network?.name
                         : "Wrong Network"
                       : "Connect Wallet"
