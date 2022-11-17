@@ -10,8 +10,7 @@ import TransferModal from "../../components/TransferModal";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
-import { client, tokenClient, MODULE_ADDRESS } from "../../utils/aptosClient";
-import toast from "react-hot-toast";
+import { client, tokenClient, MODULE_ADDRESS, CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME } from "../../utils/aptosClient";
 
 type Props = {};
 
@@ -47,9 +46,9 @@ const Home = (props: Props) => {
       await tokenClient
         .getTokenForAccount(account.address, {
           token_data_id: {
-            creator: MODULE_ADDRESS,
-            collection: "AptosChatinV1: Justa Liang",
-            name: "Demo Chat",
+            creator: CREATOR_ADDRESS,
+            collection: COLLECTION_NAME,
+            name: GROUP_NAME,
           },
           property_version: "0",
         })

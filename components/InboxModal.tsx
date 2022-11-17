@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
-import { client, Types, MODULE_ADDRESS } from "../utils/aptosClient";
+import { client, Types, MODULE_ADDRESS, CREATOR_ADDRESS, GROUP_NAME } from "../utils/aptosClient";
 
 type Props = {
   setInboxModalOn: Function;
@@ -25,7 +25,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
       type: "entry_function_payload",
       function: `${MODULE_ADDRESS}::chatin_v1::confirm`,
       type_arguments: [],
-      arguments: [MODULE_ADDRESS, "Demo Chat"],
+      arguments: [CREATOR_ADDRESS, GROUP_NAME],
     };
     const transactionRes = await signAndSubmitTransaction(
       payload

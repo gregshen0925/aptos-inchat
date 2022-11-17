@@ -14,7 +14,7 @@ import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
 import { ChatInfo } from "../../typing";
-import { client, tokenClient, MODULE_ADDRESS } from "../../utils/aptosClient";
+import { client, tokenClient, MODULE_ADDRESS, CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME } from "../../utils/aptosClient";
 import Image from "next/image";
 import MessageListPublic from "../../PublicRoom/MessageListPublic";
 import ChatInputPublic from "../../PublicRoom/ChatInputPublic";
@@ -75,7 +75,7 @@ const Home = (props: Props) => {
           setAvatar("");
         });
       await tokenClient
-        .getTokenData(MODULE_ADDRESS, "AptosChatinV1: Justa Liang", "Demo Chat")
+        .getTokenData(CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME)
         .then((tokenData) => {
           // console.log(tokenData)
           // console.log(tokenData.collection)
@@ -88,8 +88,8 @@ const Home = (props: Props) => {
               description: "This is a public room",
             },
             {
-              creator: MODULE_ADDRESS,
-              collection: "AptosChatinV1: Justa Liang",
+              creator: CREATOR_ADDRESS,
+              collection: COLLECTION_NAME,
               chatName: tokenData.name,
               chatImage: tokenData.uri,
               description: tokenData.description,
