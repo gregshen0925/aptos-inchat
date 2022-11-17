@@ -38,7 +38,6 @@ const ChatroomCard = ({ chatInfo, setPublicRoom }: Props) => {
       return;
     }
     setPublicRoom?.(true);
-    toast.success("Joined Chatroom");
   };
 
   const handleClick = () => {
