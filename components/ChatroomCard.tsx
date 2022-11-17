@@ -26,7 +26,8 @@ const ChatroomCard = ({ chatInfo, setPublicRoom }: Props) => {
           property_version: "0",
         })
         .then((balance) => {
-          if (parseInt(balance.amount) > 0) setChatName(chatInfo.chatName);
+          if (parseInt(balance.amount) > 0)
+            setChatName(chatInfo.chatName);
         });
     };
     getTokenForAccount();
@@ -41,7 +42,8 @@ const ChatroomCard = ({ chatInfo, setPublicRoom }: Props) => {
   };
 
   const handleClick = () => {
-    if (!chatName) toast.error("no pemission");
+    if (!(chatInfo.chatName === "Public") && !chatName)
+      toast.error("no pemission");
   }
 
   return (
