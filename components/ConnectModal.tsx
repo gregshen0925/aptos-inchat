@@ -93,7 +93,7 @@ const index = ({ setConnectModalOn }: Props) => {
           </div>
           <div className="p-6">
             <p className="text-sm font-normal text-gray-400">
-              Connect with one of the following wallets.
+              If you're using mobile, please select Blocto Wallet
             </p>
             <ul className="my-4 space-y-3">{renderWalletConnectorGroup()}</ul>
           </div>

@@ -72,7 +72,7 @@ const ChatInput = ({ haveToken, avatar, username }: Props) => {
         type="text"
         value={input}
         onChange={handleChange}
-        placeholder="If you're in a room and you can't type, refresh the page"
+        placeholder="Enter message here..."
         className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
                 px-5 py-3 disables:opacity-50 disabled:cursor-not-allowed"
       />

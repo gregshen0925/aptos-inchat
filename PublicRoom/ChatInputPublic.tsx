@@ -6,13 +6,14 @@ import { Message } from "../typing";
 import useSWR from "swr";
 import fetcher from "../utils/fetchMessages";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import { toast } from "react-hot-toast";
 
 type Props = {
   username: string;
   avatar: string;
 };
 
-const ChatInput = ({  avatar, username }: Props) => {
+const ChatInput = ({ avatar, username }: Props) => {
   const [input, setInput] = useState("");
   const { account, disconnect, connected, wallet: currentWallet } = useWallet();
   const {
@@ -28,6 +29,12 @@ const ChatInput = ({  avatar, username }: Props) => {
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trimStart()) return;
+
+    // if (!avatar) {
+    //   toast.error(
+    //     "If you just registered, please refresh the page"
+    //   );
+    // }
 
     const messageToSend = input.trimStart();
 
@@ -71,13 +78,13 @@ const ChatInput = ({  avatar, username }: Props) => {
         type="text"
         value={input}
         onChange={handleChange}
-        placeholder="If you're in a room and you can't type, refresh the page"
+        placeholder="Enter message here..."
         className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
                 px-5 py-3 disables:opacity-50 disabled:cursor-not-allowed"
       />
       <button
         type="submit"
-        disabled={!input || !avatar}
+        disabled={!input}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
       >

@@ -1,6 +1,7 @@
 "use client";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { client, Types, MODULE_ADDRESS } from "../utils/aptosClient";
 import { uploadAssetToIpfs } from "../utils/uploadIPFS";
 
@@ -11,6 +12,7 @@ type Props = {
 const Register = ({ setUsername }: Props) => {
   const [input, setInput] = useState<string>("");
   const [imageToUpload, setImageToUpload] = useState<File>();
+  const [loading, setLoading] = useState<boolean>(false);
   const {
     account,
     signAndSubmitTransaction,
@@ -28,7 +30,9 @@ const Register = ({ setUsername }: Props) => {
     }
   };
   const handleRegister = async () => {
+    setLoading(true);
     if (!imageToUpload) {
+      setLoading(false);
       return;
     }
 
@@ -45,9 +49,15 @@ const Register = ({ setUsername }: Props) => {
         payload
         // txOptions
       );
-      await client.waitForTransaction(transactionRes?.hash || "").then(() => {
-        setUsername(input);
-      });
+      await client
+        .waitForTransaction(transactionRes?.hash || "", { checkSuccess: true })
+        .then(() => {
+          setUsername(input);
+          toast.success(
+            "Your avatar will show within a minute due to IPFS gateway issue."
+          );
+          setLoading(false);
+        });
     }
   };
 
@@ -101,7 +111,7 @@ const Register = ({ setUsername }: Props) => {
             </a>
           </label>
         </div> */}
-        <div className="text-red-400 pt-4">
+        <div className="text-red-400 pt-4 animate-pulse">
           Make sure you have claimed airdrop APT in your wallet
         </div>
         <div className="flex justify-center py-5">
@@ -114,7 +124,7 @@ const Register = ({ setUsername }: Props) => {
               // || !imageToUpload
             }
           >
-            Register
+            {loading ? "Loading..." : "Register"}
           </button>
         </div>
       </form>
