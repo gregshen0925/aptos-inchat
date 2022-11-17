@@ -21,7 +21,7 @@ const Home = (props: Props) => {
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [transferModalOn, setTransferModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
-  const [haveToken, setHaveToken] = useState<boolean>(false);
+  const [tokenBalance, setTokenBalance] = useState<number>(-1);
   const {
     account,
     connected,
@@ -54,7 +54,10 @@ const Home = (props: Props) => {
           property_version: "0",
         })
         .then((balance) => {
-          if (parseInt(balance.amount) > 0) setHaveToken(true)
+          setTokenBalance(parseInt(balance.amount))
+        })
+        .catch(() => {
+          setTokenBalance(0)
         });
     };
     getTokenForAccount();
@@ -62,8 +65,7 @@ const Home = (props: Props) => {
 
   useEffect(() => {
     // check if connected
-    if (!connected || !address || !(network?.name?.toString() === "Testnet")) {
-      setLoading(true);
+    if (!connected || !address || !(network?.name?.toString() === "Testnet") || tokenBalance < 0) {
       return;
     }
     setLoading(true);
@@ -85,7 +87,7 @@ const Home = (props: Props) => {
       setLoading(false);
     };
     getUserName();
-  }, [connected, address, network, haveToken]);
+  }, [connected, address, network, tokenBalance]);
 
   return (
     <div className="bg-black min-h-screen">
@@ -137,7 +139,7 @@ const Home = (props: Props) => {
         <div className="flex justify-center">
           <Register setUsername={setUsername} />
         </div>
-      ) : !haveToken ? (
+      ) : tokenBalance <= 0 ? (
         <p className="flex justify-center px-5 text-3xl text-white font-bold">
           No permission
         </p>
@@ -145,10 +147,10 @@ const Home = (props: Props) => {
         <div className="bg-black min-h-screen">
           <MessageList
             username={username}
-            haveToken={true}
+            haveToken={tokenBalance > 0}
             setPublicRoom={undefined}
           />
-          <ChatInput username={username} avatar={avatar!} haveToken={true} />
+          <ChatInput username={username} avatar={avatar!} haveToken={tokenBalance > 0} />
         </div>
       )}
     </div>

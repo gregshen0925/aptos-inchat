@@ -40,8 +40,12 @@ const ChatroomCard = ({ chatInfo, setPublicRoom }: Props) => {
     toast.success("Joined Chatroom");
   };
 
+  const handleClick = () => {
+    if (!chatName) toast.error("no pemission");
+  }
+
   return (
-    <div className="">
+    <div className="" onClick={handleClick}>
       <Link href={`/dashboard/${chatName}`}>
         <button
           onClick={handleJoinPublic}
