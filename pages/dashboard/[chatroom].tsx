@@ -10,7 +10,8 @@ import TransferModal from "../../components/TransferModal";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
-import { client, MODULE_ADDRESS } from "../../utils/aptosClient";
+import { client, tokenClient, MODULE_ADDRESS } from "../../utils/aptosClient";
+import toast from "react-hot-toast";
 
 type Props = {};
 
@@ -41,6 +42,25 @@ const Home = (props: Props) => {
   }, [connected, account]);
 
   useEffect(() => {
+    const getTokenForAccount = async () => {
+      if (!account || !account.address) return;
+      await tokenClient
+        .getTokenForAccount(account.address, {
+          token_data_id: {
+            creator: MODULE_ADDRESS,
+            collection: "AptosChatinV1: Justa Liang",
+            name: "Demo Chat",
+          },
+          property_version: "0",
+        })
+        .then((balance) => {
+          if (parseInt(balance.amount) > 0) setHaveToken(true)
+        });
+    };
+    getTokenForAccount();
+  }, [account])
+
+  useEffect(() => {
     // check if connected
     if (!connected || !address || !(network?.name?.toString() === "Testnet")) {
       setLoading(true);
@@ -65,7 +85,7 @@ const Home = (props: Props) => {
       setLoading(false);
     };
     getUserName();
-  }, [connected, address, network]);
+  }, [connected, address, network, haveToken]);
 
   return (
     <div className="bg-black min-h-screen">
@@ -117,6 +137,10 @@ const Home = (props: Props) => {
         <div className="flex justify-center">
           <Register setUsername={setUsername} />
         </div>
+      ) : !haveToken ? (
+        <p className="flex justify-center px-5 text-3xl text-white font-bold">
+          No permission
+        </p>
       ) : (
         <div className="bg-black min-h-screen">
           <MessageList
