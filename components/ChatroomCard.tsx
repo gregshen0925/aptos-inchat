@@ -43,7 +43,7 @@ const ChatroomCard = ({ chatInfo, setPublicRoom }: Props) => {
 
   const handleClick = () => {
     if (!(chatInfo.chatName === "Public") && !chatName)
-      toast.error("no pemission");
+      toast.error("no permission");
   }
 
   return (
