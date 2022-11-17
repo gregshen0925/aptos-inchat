@@ -114,7 +114,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
             <div className=" w-full flex space-x-2 bg-black justify-center">
               <input
                 type="text"
-                value={input.trim()}
+                value={input.trimStart()}
                 onChange={handleChange}
                 placeholder="Enter address here..."
                 className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
@@ -123,7 +123,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
               <button
                 type="submit"
                 onClick={handleInvite}
-                disabled={!input.trim()}
+                disabled={!input.trimStart()}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
               >
