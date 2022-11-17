@@ -18,6 +18,7 @@ import { client, tokenClient, MODULE_ADDRESS } from "../../utils/aptosClient";
 import Image from "next/image";
 import MessageListPublic from "../../PublicRoom/MessageListPublic";
 import ChatInputPublic from "../../PublicRoom/ChatInputPublic";
+import { targetNetwork } from "../../constant";
 
 type Props = {};
 
@@ -40,8 +41,6 @@ const Home = (props: Props) => {
   const [avatar, setAvatar] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const [walletInfoModalOn, setWalletInfoModalOn] = useState<boolean>(false);
-
-  const targetNetwork = WalletAdapterNetwork.Testnet;
 
   useEffect(() => {
     setLoading(true);

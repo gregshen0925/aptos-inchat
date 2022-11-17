@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { targetNetwork } from "../constant";
 
 type Props = {
   setConnectModalOn: Function;
@@ -128,7 +129,9 @@ const Header = ({
               <span className="mas">
                 {`${
                   connected
-                    ? network?.name?.toString() === "Testnet"
+                    ? !(
+                        network?.name?.toString().toLowerCase() == targetNetwork
+                      )
                       ? network?.name
                       : "Wrong Network"
                     : "Connect Wallet"
