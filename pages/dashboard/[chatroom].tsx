@@ -1,7 +1,4 @@
-import {
-  useWallet,
-  WalletAdapterNetwork,
-} from "@manahippo/aptos-wallet-adapter";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import ConnectModal from "../../components/ConnectModal";
@@ -13,11 +10,7 @@ import TransferModal from "../../components/TransferModal";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
-import { ChatInfo } from "../../typing";
-import { client, tokenClient, MODULE_ADDRESS } from "../../utils/aptosClient";
-import Image from "next/image";
-import MessageListPublic from "../../PublicRoom/MessageListPublic";
-import ChatInputPublic from "../../PublicRoom/ChatInputPublic";
+import { client, MODULE_ADDRESS } from "../../utils/aptosClient";
 
 type Props = {};
 
@@ -27,8 +20,7 @@ const Home = (props: Props) => {
   const [inviteModalOn, setInviteModalOn] = useState<boolean>(false);
   const [transferModalOn, setTransferModalOn] = useState<boolean>(false);
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
-  const [chatGroupToken, setChatGroupToken] = useState<ChatInfo[]>();
-  const [publicRoom, setPublicRoom] = useState<boolean>(false);
+  const [haveToken, setHaveToken] = useState<boolean>(false);
   const {
     account,
     connected,
@@ -41,7 +33,7 @@ const Home = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [walletInfoModalOn, setWalletInfoModalOn] = useState<boolean>(false);
 
-  const targetNetwork = WalletAdapterNetwork.Testnet;
+  const targetNetwork = "Testnet";
 
   useEffect(() => {
     setLoading(true);
@@ -50,11 +42,7 @@ const Home = (props: Props) => {
 
   useEffect(() => {
     // check if connected
-    if (
-      !connected ||
-      !address ||
-      !(network?.name?.toString().toLowerCase() == targetNetwork)
-    ) {
+    if (!connected || !address || !(network?.name?.toString() === "Testnet")) {
       setLoading(true);
       return;
     }
@@ -64,7 +52,6 @@ const Home = (props: Props) => {
       await client
         .getAccountResource(address, `${MODULE_ADDRESS}::profile::Profile`)
         .then((profile) => {
-          // console.log(profile)
           //@ts-ignore
           setUsername(profile.data.username);
           //@ts-ignore
@@ -75,34 +62,8 @@ const Home = (props: Props) => {
           setUsername("");
           setAvatar("");
         });
-      await tokenClient
-        .getTokenData(MODULE_ADDRESS, "AptosChatinV1: Justa Liang", "Demo Chat")
-        .then((tokenData) => {
-          // console.log(tokenData)
-          // console.log(tokenData.collection)
-          setChatGroupToken([
-            {
-              creator: "InJoy-Labs",
-              collection: "",
-              chatName: "Public",
-              chatImage: "https://i.imgur.com/1MXoiO1.jpg",
-              description: "This is a public room",
-            },
-            {
-              creator: MODULE_ADDRESS,
-              collection: "AptosChatinV1: Justa Liang",
-              chatName: tokenData.name,
-              chatImage: tokenData.uri,
-              description: tokenData.description,
-            },
-          ]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
       setLoading(false);
     };
-
     getUserName();
   }, [connected, address, network]);
 
@@ -136,25 +97,16 @@ const Home = (props: Props) => {
           username={username}
         />
       ) : null}
-      {network &&
-        !(network.name?.toString().toLowerCase() == targetNetwork) && (
-          <div className="text-white text-center font-bold pt-10">
-            Change Your Network to {targetNetwork}!
-          </div>
-        )}
+      {network && !(network.name?.toString() === targetNetwork) && (
+        <div className="text-white text-center font-bold pt-10">
+          Change Your Network to {targetNetwork}!
+        </div>
+      )}
 
       {!connected ? (
         <div>
-          <div className="flex flex-col items-center">
-            <p className="text-3xl text-white font-bold text-transparent py-10 bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
-              This app combines Aptos Token Design and Universal Profile
-            </p>
-            <Image
-              src="https://i.imgur.com/e05wp8H.png"
-              alt="work flow"
-              width={800}
-              height={800}
-            />
+          <div className="font-bold text-2xl sm:text-3xl text-white pt-10 text-center">
+            Please Connect Wallet First
           </div>
         </div>
       ) : loading ? (
@@ -165,23 +117,14 @@ const Home = (props: Props) => {
         <div className="flex justify-center">
           <Register setUsername={setUsername} />
         </div>
-      ) : publicRoom ? (
-        <div>
-          <MessageListPublic
-            username={username}
-            setPublicRoom={setPublicRoom}
-          />
-          <ChatInputPublic username={username} avatar={avatar!} />
-        </div>
       ) : (
-        <div className="bg-black">
+        <div className="bg-black min-h-screen">
           <MessageList
-            username={""}
-            haveToken={false}
-            chatGroupToken={chatGroupToken}
-            setPublicRoom={setPublicRoom}
+            username={username}
+            haveToken={true}
+            setPublicRoom={undefined}
           />
-          <ChatInput username={""} avatar={avatar!} haveToken={false} />
+          <ChatInput username={username} avatar={avatar!} haveToken={true} />
         </div>
       )}
     </div>

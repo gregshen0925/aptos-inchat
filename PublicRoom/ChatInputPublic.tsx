@@ -10,17 +10,16 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 type Props = {
   username: string;
   avatar: string;
-  haveToken: boolean;
 };
 
-const ChatInput = ({ haveToken, avatar, username }: Props) => {
+const ChatInput = ({  avatar, username }: Props) => {
   const [input, setInput] = useState("");
   const { account, disconnect, connected, wallet: currentWallet } = useWallet();
   const {
     data: messages,
     error,
     mutate,
-  } = useSWR<Message[]>("/api/getMessages", fetcher);
+  } = useSWR<Message[]>("/api/getMessagesPublic", fetcher);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -45,7 +44,7 @@ const ChatInput = ({ haveToken, avatar, username }: Props) => {
     };
 
     const uploadMessageToUpstash = async () => {
-      const data = await fetch("/api/addMessage", {
+      const data = await fetch("/api/addMessagePublic", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +77,7 @@ const ChatInput = ({ haveToken, avatar, username }: Props) => {
       />
       <button
         type="submit"
-        disabled={!input || !avatar || !haveToken}
+        disabled={!input || !avatar}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
       >

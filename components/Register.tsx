@@ -1,8 +1,7 @@
 "use client";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
-import { Types } from "aptos";
-import { AptosClient } from "aptos";
+import { client, Types, MODULE_ADDRESS } from "../utils/aptosClient";
 import { uploadAssetToIpfs } from "../utils/uploadIPFS";
 
 type Props = {
@@ -38,18 +37,13 @@ const Register = ({ setUsername }: Props) => {
     if (account?.address || account?.publicKey) {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
-        function:
-          "0x6064192b201dc3a7cff0513654610b141e754c9eb1ff22d40622f858c9d912e9::chatin_v1::register",
+        function: `${MODULE_ADDRESS}::chatin_v1::register`,
         type_arguments: [],
         arguments: [input!, "", "", path],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
         // txOptions
-      );
-      const client = new AptosClient(
-        // "https://fullnode.mainnet.aptoslabs.com/v1"
-        "https://fullnode.testnet.aptoslabs.com"
       );
       await client.waitForTransaction(transactionRes?.hash || "").then(() => {
         setUsername(input);
@@ -65,7 +59,7 @@ const Register = ({ setUsername }: Props) => {
       <form>
         <div className="py-3">
           <label className="block mb-2 text-sm font-medium text-gray-300">
-            User Name
+            User Name(required)
           </label>
           <input
             type="username"
@@ -78,7 +72,7 @@ const Register = ({ setUsername }: Props) => {
           />
         </div>
         <label className="block mb-2 text-sm font-medium text-gray-300">
-          Avatar
+          Avatar(required)
         </label>
         <input
           className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
@@ -107,6 +101,9 @@ const Register = ({ setUsername }: Props) => {
             </a>
           </label>
         </div> */}
+        <div className="text-red-400 pt-4">
+          Make sure you have claimed airdrop APT in your wallet
+        </div>
         <div className="flex justify-center py-5">
           <button
             type="button"

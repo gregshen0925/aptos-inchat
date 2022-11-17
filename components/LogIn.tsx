@@ -8,7 +8,7 @@ type Props = {};
 
 const LogIn = (props: Props) => {
   const [text, count] = useTypewriter({
-    words: [`Universal Profile Module Chat App`],
+    words: [`Perfect Showcase For Aptos Token Design`],
     delaySpeed: 500,
   });
 
