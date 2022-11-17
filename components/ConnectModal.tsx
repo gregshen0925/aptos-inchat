@@ -65,7 +65,7 @@ const index = ({ setConnectModalOn }: Props) => {
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">
         <div
           ref={clickOutsideRef}
-          className="relative rounded-2xl shadow bg-black overflow-y-scroll"
+          className="relative rounded-2xl shadow bg-black"
         >
           <button
             onClick={() => setConnectModalOn(false)}
@@ -91,9 +91,9 @@ const index = ({ setConnectModalOn }: Props) => {
               Connect Wallet
             </h3>
           </div>
-          <div className="p-6">
+          <div className="p-6 overflow-y-scroll">
             <p className="text-sm font-normal text-gray-400">
-              If you're using mobile, please select Blocto Wallet
+              Currently not available for mobile
             </p>
             <ul className="my-4 space-y-3">{renderWalletConnectorGroup()}</ul>
           </div>

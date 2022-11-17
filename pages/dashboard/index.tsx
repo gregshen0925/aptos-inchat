@@ -145,7 +145,7 @@ const Home = (props: Props) => {
       {!connected ? (
         <div>
           <div className="flex flex-col items-center">
-            <p className="text-3xl text-white font-bold text-transparent py-10 bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+            <p className="flex justify-center px-5 text-3xl text-white font-bold text-transparent py-10 bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
               This app combines Aptos Token Design and Universal Profile
             </p>
             <Image
