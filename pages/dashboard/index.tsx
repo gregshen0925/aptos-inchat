@@ -14,7 +14,14 @@ import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
 import { ChatInfo } from "../../typing";
-import { client, tokenClient, MODULE_ADDRESS, CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME } from "../../utils/aptosClient";
+import {
+  client,
+  tokenClient,
+  MODULE_ADDRESS,
+  CREATOR_ADDRESS,
+  COLLECTION_NAME,
+  GROUP_NAME,
+} from "../../utils/aptosClient";
 import Image from "next/image";
 import MessageListPublic from "../../PublicRoom/MessageListPublic";
 import ChatInputPublic from "../../PublicRoom/ChatInputPublic";
@@ -107,7 +114,7 @@ const Home = (props: Props) => {
 
   return (
     <div className="bg-black min-h-screen">
-      <title>Chatin Dashboard</title>
+      <title>InChat Dashboard</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="icon" href="https://i.imgur.com/W7K187R.png" />
       <Header

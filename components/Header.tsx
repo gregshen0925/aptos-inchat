@@ -58,7 +58,7 @@ const Header = ({
           {account ? (
             <div>
               <p className="text-white font-bold text-lg sm:text-2xl">
-                Aptos <span className="text-blue-400">Chatin</span>
+                Aptos <span className="text-blue-400">InChat</span>
               </p>
               <p className="font-bold text-sm text-gray-300">
                 Logged in as: {username}
@@ -66,7 +66,7 @@ const Header = ({
             </div>
           ) : (
             <div className="text-white font-bold text-lg sm:text-2xl">
-              Aptos <span className="text-blue-400">Chatin</span>
+              Aptos <span className="text-blue-400">InChat</span>
             </div>
           )}
         </div>
