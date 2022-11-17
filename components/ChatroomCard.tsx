@@ -43,7 +43,10 @@ const ChatroomCard = ({ chatInfo, setPublicRoom }: Props) => {
 
   const handleClick = () => {
     if (!(chatInfo.chatName === "Public") && !chatName)
-      toast.error("no permission");
+      {toast.error("no permission");}
+      else{
+        toast.success("Joined Chatroom");
+      }
   }
 
   return (
