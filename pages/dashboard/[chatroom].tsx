@@ -10,7 +10,14 @@ import TransferModal from "../../components/TransferModal";
 import Register from "../../components/Register";
 import Loading from "../../components/Loading";
 import WalletInfoModal from "../../components/WalletInfoModal";
-import { client, tokenClient, MODULE_ADDRESS, CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME } from "../../utils/aptosClient";
+import {
+  client,
+  tokenClient,
+  MODULE_ADDRESS,
+  CREATOR_ADDRESS,
+  COLLECTION_NAME,
+  GROUP_NAME,
+} from "../../utils/aptosClient";
 
 type Props = {};
 
@@ -53,18 +60,23 @@ const Home = (props: Props) => {
           property_version: "0",
         })
         .then((balance) => {
-          setTokenBalance(parseInt(balance.amount))
+          setTokenBalance(parseInt(balance.amount));
         })
         .catch(() => {
-          setTokenBalance(0)
+          setTokenBalance(0);
         });
     };
     getTokenForAccount();
-  }, [account])
+  }, [account]);
 
   useEffect(() => {
     // check if connected
-    if (!connected || !address || !(network?.name?.toString() === "Testnet") || tokenBalance < 0) {
+    if (
+      !connected ||
+      !address ||
+      !(network?.name?.toString() === "Testnet") ||
+      tokenBalance < 0
+    ) {
       return;
     }
     setLoading(true);
@@ -90,7 +102,7 @@ const Home = (props: Props) => {
 
   return (
     <div className="bg-black min-h-screen">
-      <title>Chatin Dashboard</title>
+      <title>Greg's Room</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="icon" href="https://i.imgur.com/W7K187R.png" />
       <Header
@@ -149,7 +161,11 @@ const Home = (props: Props) => {
             haveToken={tokenBalance > 0}
             setPublicRoom={undefined}
           />
-          <ChatInput username={username} avatar={avatar!} haveToken={tokenBalance > 0} />
+          <ChatInput
+            username={username}
+            avatar={avatar!}
+            haveToken={tokenBalance > 0}
+          />
         </div>
       )}
     </div>
