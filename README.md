@@ -8,31 +8,21 @@ Chatting Dapp using Aptos Token Design
 ## InChat Module
  - repo: https://github.com/JustaLiang/aptos-inchat-module
  - Wrapped Aptos token and toke_tansfers module
+ 
+## Vision
+As proof of concept, InChat app showcases how the combination of "Aptos token design" and "InJoy profile module" can optimize exclusive communities’ user experience.
 
-## Next.js + Tailwind CSS Example
+## How InChat was built
+1. InChat_V1 module (Move Language)
+2. Metadata storage (IPFS + Aptos Token Module)
+3. Nextjs13 for optimizing user experience
+4. Frontend design (Tailwind CSS + SASS)
+5. Data subscription and optimizing (Pusher)
+6. Aptos Wallet Integration (Hippospace)
+7. Typescript Aptos SDK
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## Target Users
+Exclusive communities, DAOs, chat groups can be token-gated through an Aptos NFT.
 
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## What's next for Aptos InChat?
+In the next few months we will work on an universal identity layer that uses the same token design as a decentralized identity token for people.
