@@ -23,8 +23,8 @@ import {
   GROUP_NAME,
 } from "../../utils/aptosClient";
 import Image from "next/image";
-import MessageListPublic from "../../PublicRoom/MessageListPublic";
-import ChatInputPublic from "../../PublicRoom/ChatInputPublic";
+import MessageListPublic from "../../publicRoom/MessageListPublic";
+import ChatInputPublic from "../../publicRoom/ChatInputPublic";
 import { targetNetwork } from "../../constant";
 
 type Props = {};

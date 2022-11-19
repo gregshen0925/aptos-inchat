@@ -2,7 +2,7 @@
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { client, Types, MODULE_ADDRESS } from "../utils/aptosClient";
+import { client, Types, MODULE_ID } from "../utils/aptosClient";
 import { uploadAssetToIpfs } from "../utils/uploadIPFS";
 
 type Props = {
@@ -41,7 +41,7 @@ const Register = ({ setUsername }: Props) => {
     if (account?.address || account?.publicKey) {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
-        function: `${MODULE_ADDRESS}::chatin_v1::register`,
+        function: `${MODULE_ID}::register`,
         type_arguments: [],
         arguments: [input!, "", "", path],
       };

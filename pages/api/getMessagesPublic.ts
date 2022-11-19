@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import redis from "../../PublicRoom/redis";
+import redis from "../../publicRoom/redis";
 import { Message } from "../../typing";
 
 type Data = {

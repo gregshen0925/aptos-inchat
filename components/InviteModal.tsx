@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
-import { client, Types, MODULE_ADDRESS, USER_TABLE_HANDLE, CREATOR_ADDRESS, GROUP_NAME } from "../utils/aptosClient";
+import { client, Types, USER_TABLE_HANDLE, CREATOR_ADDRESS, GROUP_NAME, MODULE_ID } from "../utils/aptosClient";
 
 type Props = {
   setInviteModalOn: Function;
@@ -36,7 +36,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function:
-          `${MODULE_ADDRESS}::chatin_v1::invite`,
+          `${MODULE_ID}::invite`,
         type_arguments: [],
         arguments: [CREATOR_ADDRESS, input],
       };
@@ -60,7 +60,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function:
-          `${MODULE_ADDRESS}::chatin_v1::invite`,
+          `${MODULE_ID}::invite`,
         type_arguments: [],
         arguments: [GROUP_NAME, userAddress],
       };

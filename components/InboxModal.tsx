@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
-import { client, Types, MODULE_ADDRESS, CREATOR_ADDRESS, GROUP_NAME } from "../utils/aptosClient";
+import { client, Types, CREATOR_ADDRESS, GROUP_NAME, MODULE_ID } from "../utils/aptosClient";
 
 type Props = {
   setInboxModalOn: Function;
@@ -23,7 +23,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
     // claim NFT
     const payload: Types.TransactionPayload = {
       type: "entry_function_payload",
-      function: `${MODULE_ADDRESS}::chatin_v1::confirm`,
+      function: `${MODULE_ID}::confirm`,
       type_arguments: [],
       arguments: [CREATOR_ADDRESS, GROUP_NAME],
     };
