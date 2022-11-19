@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import redis from "../../publicRoom/redis";
+import redis from "../../public/redis";
 import { Message } from "../../typing";
-import { serverPusher } from "../../publicRoom/pusher";
+import { serverPusher } from "../../public/pusher";
 
 type Data = {
   message: Message;
