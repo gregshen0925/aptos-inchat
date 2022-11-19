@@ -3,12 +3,18 @@
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { useWallet } from "@manahippo/aptos-wallet-adapter";
+import { client, CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME, Types } from "../utils/aptosClient";
+import { useRouter } from "next/router";
 
 type Props = {
   setTransferModalOn: Function;
 };
 
-const InviteModal = ({ setTransferModalOn }: Props) => {
+const TransferModal = ({ setTransferModalOn }: Props) => {
+  const { account, signAndSubmitTransaction,  } = useWallet();
+  const router = useRouter();
   const clickOutsideRef = useRef<HTMLDivElement>(null);
   const clickOutsidehandler = () => {
     setTransferModalOn(false);
@@ -21,7 +27,34 @@ const InviteModal = ({ setTransferModalOn }: Props) => {
   };
 
   const handleTransfer = async () => {
-    setTransferModalOn(false);
+    if (account?.address || account?.publicKey) {
+      const payload: Types.TransactionPayload = {
+        type: "entry_function_payload",
+        function: "0x3::token_transfers::offer_script",
+        type_arguments: [],
+        arguments: [
+          input,
+          CREATOR_ADDRESS,
+          COLLECTION_NAME,
+          GROUP_NAME,
+          0,
+          1,
+        ],
+      };
+      const transactionRes = await signAndSubmitTransaction(
+        payload
+        // txOptions
+      );
+      await client
+        .waitForTransaction(transactionRes?.hash || "", { checkSuccess: true })
+        .then(() => {
+          toast.success(
+            "Successfully transfered chat room token"
+          );
+          setTransferModalOn(false);
+          router.push("/dashboard");
+        });
+    }
   };
 
   return (
@@ -93,4 +126,4 @@ const InviteModal = ({ setTransferModalOn }: Props) => {
   );
 };
 
-export default InviteModal;
+export default TransferModal;
