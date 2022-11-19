@@ -12,6 +12,7 @@ import {
   MODULE_ID,
 } from "../utils/aptosClient";
 import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
 type Props = {
   setInviteModalOn: Function;
 };
@@ -72,6 +73,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
       );
       await client.waitForTransaction(transactionRes?.hash || "").then(() => {
         // do something
+        toast.success(`Successfully invited ${input}`);
       });
       setInviteModalOn(false);
     }
