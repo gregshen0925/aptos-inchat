@@ -26,7 +26,7 @@ const LogIn = (props: Props) => {
           />
           <img
             className="h-15 w-30 md:h-40 md:w-100"
-            src="https://i.imgur.com/roc2UVg.png"
+            src="https://i.imgur.com/Fuw8CpQ.png"
             alt=""
           />
         </div>
