@@ -153,10 +153,10 @@ const Home = (props: Props) => {
         <div>
           <div className="flex flex-col items-center">
             <p className="flex justify-center px-5 text-3xl text-white font-bold text-transparent py-10 bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
-              This app combines Aptos Token Design and Universal Profile
+              This app combines Aptos Token Design and InJoy Profile Module
             </p>
             <Image
-              src="https://i.imgur.com/e05wp8H.png"
+              src="https://i.imgur.com/Fuw8CpQ"
               alt="work flow"
               width={800}
               height={800}
