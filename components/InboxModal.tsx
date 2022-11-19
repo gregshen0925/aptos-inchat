@@ -3,7 +3,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
-import { client, Types, CREATOR_ADDRESS, GROUP_NAME, MODULE_ID } from "../utils/aptosClient";
+import {
+  client,
+  Types,
+  CREATOR_ADDRESS,
+  GROUP_NAME,
+  MODULE_ID,
+} from "../utils/aptosClient";
+import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 type Props = {
   setInboxModalOn: Function;
@@ -33,6 +41,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
     );
     await client.waitForTransaction(transactionRes?.hash || "").then(() => {
       // do something
+      toast.success("Successfully Claimed Token");
     });
     setInboxModalOn(false);
   };
@@ -75,14 +84,21 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
             {/* <ul className="my-4 space-y-3">{renderWalletConnectorGroup()}</ul> */}
           </div>
           <div className="flex justify-center p-4">
-            <button
-              type="submit"
-              onClick={handleConfirm}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl
-                disables:opacity-50 disabled:cursor-not-allowed"
+            <motion.div
+              whileTap={{
+                scale: 0.8,
+                borderRadius: "100%",
+              }}
             >
-              Confirm
-            </button>
+              <button
+                type="submit"
+                onClick={handleConfirm}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl
+                disables:opacity-50 disabled:cursor-not-allowed"
+              >
+                Confirm
+              </button>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
+import { motion } from "framer-motion";
 
 type Props = {
   setTransferModalOn: Function;
@@ -68,15 +69,22 @@ const InviteModal = ({ setTransferModalOn }: Props) => {
                 className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
                 px-4 py-2 disables:opacity-50 disabled:cursor-not-allowed"
               />
-              <button
-                type="submit"
-                disabled={!input.trim()}
-                onClick={handleTransfer}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
-                disables:opacity-50 disabled:cursor-not-allowed"
+              <motion.div
+                whileTap={{
+                  scale: 0.8,
+                  borderRadius: "100%",
+                }}
               >
-                Transfer
-              </button>
+                <button
+                  type="submit"
+                  disabled={!input.trim()}
+                  onClick={handleTransfer}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+                disables:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Transfer
+                </button>
+              </motion.div>
             </div>
           </div>
         </div>

@@ -3,8 +3,15 @@
 import React, { useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
-import { client, Types, USER_TABLE_HANDLE, CREATOR_ADDRESS, GROUP_NAME, MODULE_ID } from "../utils/aptosClient";
-
+import {
+  client,
+  Types,
+  USER_TABLE_HANDLE,
+  CREATOR_ADDRESS,
+  GROUP_NAME,
+  MODULE_ID,
+} from "../utils/aptosClient";
+import { motion } from "framer-motion";
 type Props = {
   setInviteModalOn: Function;
 };
@@ -30,13 +37,12 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
   };
 
   const handleInvite = async () => {
-    if (!account?.address && !account?.publicKey) return
+    if (!account?.address && !account?.publicKey) return;
     if (input.length === 66) {
       // mint NFT to someone
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
-        function:
-          `${MODULE_ID}::invite`,
+        function: `${MODULE_ID}::invite`,
         type_arguments: [],
         arguments: [GROUP_NAME, input],
       };
@@ -49,18 +55,14 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
       });
       setInviteModalOn(false);
     } else {
-      const userAddress = await client.getTableItem(
-        USER_TABLE_HANDLE,
-        {
-            key_type: "0x1::string::String",
-            value_type: `address`,
-            key: input,
-        }
-      );
+      const userAddress = await client.getTableItem(USER_TABLE_HANDLE, {
+        key_type: "0x1::string::String",
+        value_type: `address`,
+        key: input,
+      });
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
-        function:
-          `${MODULE_ID}::invite`,
+        function: `${MODULE_ID}::invite`,
         type_arguments: [],
         arguments: [GROUP_NAME, userAddress],
       };
@@ -120,15 +122,22 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
                 className="text-white flex-1 rounded border border-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent 
                 px-4 py-2 disables:opacity-50 disabled:cursor-not-allowed"
               />
-              <button
-                type="submit"
-                onClick={handleInvite}
-                disabled={!input.trimStart()}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
-                disables:opacity-50 disabled:cursor-not-allowed"
+              <motion.div
+                whileTap={{
+                  scale: 0.8,
+                  borderRadius: "100%",
+                }}
               >
-                Invite
-              </button>
+                <button
+                  type="submit"
+                  onClick={handleInvite}
+                  disabled={!input.trimStart()}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
+                disables:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Invite
+                </button>
+              </motion.div>
             </div>
           </div>
         </div>
