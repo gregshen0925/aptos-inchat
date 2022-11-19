@@ -156,7 +156,7 @@ const Home = (props: Props) => {
               This app combines Aptos Token Design and InJoy Profile Module
             </p>
             <Image
-              src="https://i.imgur.com/Fuw8CpQ"
+              src="https://i.imgur.com/Fuw8CpQ.png"
               alt="work flow"
               width={800}
               height={800}
