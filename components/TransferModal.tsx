@@ -5,7 +5,13 @@ import useOnClickOutside from "../hooks/useOnClickOutside";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
-import { client, CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME, Types } from "../utils/aptosClient";
+import {
+  client,
+  CREATOR_ADDRESS,
+  COLLECTION_NAME,
+  GROUP_NAME,
+  Types,
+} from "../utils/aptosClient";
 import { useRouter } from "next/router";
 
 type Props = {
@@ -13,8 +19,9 @@ type Props = {
 };
 
 const TransferModal = ({ setTransferModalOn }: Props) => {
-  const { account, signAndSubmitTransaction,  } = useWallet();
+  const { account, signAndSubmitTransaction } = useWallet();
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const clickOutsideRef = useRef<HTMLDivElement>(null);
   const clickOutsidehandler = () => {
     setTransferModalOn(false);
@@ -28,18 +35,12 @@ const TransferModal = ({ setTransferModalOn }: Props) => {
 
   const handleTransfer = async () => {
     if (account?.address || account?.publicKey) {
+      setLoading(true);
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
         function: "0x3::token_transfers::offer_script",
         type_arguments: [],
-        arguments: [
-          input,
-          CREATOR_ADDRESS,
-          COLLECTION_NAME,
-          GROUP_NAME,
-          0,
-          1,
-        ],
+        arguments: [input, CREATOR_ADDRESS, COLLECTION_NAME, GROUP_NAME, 0, 1],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
@@ -48,9 +49,8 @@ const TransferModal = ({ setTransferModalOn }: Props) => {
       await client
         .waitForTransaction(transactionRes?.hash || "", { checkSuccess: true })
         .then(() => {
-          toast.success(
-            "Successfully transfered chat room token"
-          );
+          toast.success("Successfully transfered chat room token");
+          setLoading(false);
           setTransferModalOn(false);
           router.push("/dashboard");
         });
@@ -115,7 +115,7 @@ const TransferModal = ({ setTransferModalOn }: Props) => {
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Transfer
+                  {loading ? "Loading" : "Transfer"}
                 </button>
               </motion.div>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import {
@@ -18,6 +18,7 @@ type Props = {
 };
 
 const InboxModal = ({ setInboxModalOn }: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const clickOutsideRef = useRef<HTMLDivElement>(null);
   const clickOutsidehandler = () => {
     setInboxModalOn(false);
@@ -29,6 +30,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
   const handleConfirm = async () => {
     if (!account?.address && !account?.publicKey) return;
     // claim NFT
+    setLoading(true);
     const payload: Types.TransactionPayload = {
       type: "entry_function_payload",
       function: `${MODULE_ID}::confirm`,
@@ -41,6 +43,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
     );
     await client.waitForTransaction(transactionRes?.hash || "").then(() => {
       // do something
+      setLoading(false);
       toast.success("Successfully Claimed Token");
     });
     setInboxModalOn(false);
@@ -96,7 +99,7 @@ const InboxModal = ({ setInboxModalOn }: Props) => {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl
                 disables:opacity-50 disabled:cursor-not-allowed"
               >
-                Confirm
+                {loading ? "Loading..." : "Confirm"}
               </button>
             </motion.div>
           </div>

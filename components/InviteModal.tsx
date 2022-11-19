@@ -32,6 +32,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
   };
   useOnClickOutside(clickOutsideRef, clickOutsidehandler);
   const [input, setInput] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
@@ -40,6 +41,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
   const handleInvite = async () => {
     if (!account?.address && !account?.publicKey) return;
     if (input.length === 66) {
+      setLoading(true);
       // mint NFT to someone
       const payload: Types.TransactionPayload = {
         type: "entry_function_payload",
@@ -74,6 +76,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
       await client.waitForTransaction(transactionRes?.hash || "").then(() => {
         // do something
         toast.success(`Successfully invited ${input}`);
+        setLoading(false);
       });
       setInviteModalOn(false);
     }
@@ -137,7 +140,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
                 disables:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Invite
+                  {loading ? "Loading..." : "Invite"}
                 </button>
               </motion.div>
             </div>
