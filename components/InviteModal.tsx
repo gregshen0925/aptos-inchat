@@ -38,7 +38,7 @@ const InviteModal = ({ setInviteModalOn }: Props) => {
         function:
           `${MODULE_ID}::invite`,
         type_arguments: [],
-        arguments: [CREATOR_ADDRESS, input],
+        arguments: [GROUP_NAME, input],
       };
       const transactionRes = await signAndSubmitTransaction(
         payload
