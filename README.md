@@ -1,6 +1,9 @@
 # Aptos InChat
 Chatting Dapp using Aptos Token Design
 
+## Vision
+As proof of concept, InChat app showcases how the combination of "Aptos token design" and "InJoy profile module" can optimize exclusive communities’ user experience.
+
 ## Universal Profile Module on Aptos
  - repo: https://github.com/JustaLiang/aptos-profile-system
  - Setup your profile once and use it everywhere
@@ -9,8 +12,9 @@ Chatting Dapp using Aptos Token Design
  - repo: https://github.com/JustaLiang/aptos-inchat-module
  - Wrapped Aptos token and toke_tansfers module
  
-## Vision
-As proof of concept, InChat app showcases how the combination of "Aptos token design" and "InJoy profile module" can optimize exclusive communities’ user experience.
+## Aptos InChat App
+ - repo: https://github.com/gregshen0925/aptos-inchat
+ - Frontend and backend of the app
 
 ## How InChat was built
 1. InChat_V1 module (Move Language)
