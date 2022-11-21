@@ -35,6 +35,7 @@ const Header = ({
     network,
     wallet: currentWallet,
   } = useWallet();
+  
   const notification: string = "Switch to testnet";
 
   useEffect(() => {
@@ -130,7 +131,7 @@ const Header = ({
               <span className="mas">
                 {`${
                   connected
-                    ? network?.name?.toString().toLowerCase() == targetNetwork
+                    ? (network?.name?.toString().toLowerCase() == targetNetwork||"Aptos testnet")
                       ? network?.name
                       : "Wrong Network"
                     : "Connect Wallet"
@@ -148,7 +149,7 @@ const Header = ({
                 <div>
                   {`${
                     connected
-                      ? network?.name?.toString().toLowerCase() == targetNetwork
+                      ? (network?.name?.toString().toLowerCase() == targetNetwork||"Aptos testnet")
                         ? network?.name
                         : "Wrong Network"
                       : "Connect Wallet"

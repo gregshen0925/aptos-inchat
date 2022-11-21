@@ -59,7 +59,7 @@ const Home = (props: Props) => {
     if (
       !connected ||
       !address ||
-      !(network?.name?.toString().toLowerCase() == targetNetwork)
+      !(network?.name?.toString().toLowerCase() == targetNetwork||"Aptos testnet")
     ) {
       setLoading(true);
       return;
@@ -143,7 +143,7 @@ const Home = (props: Props) => {
         />
       ) : null}
       {network &&
-        !(network.name?.toString().toLowerCase() == targetNetwork) && (
+        !(network?.name?.toString().toLowerCase() == targetNetwork||"Aptos testnet") && (
           <div className="text-white text-center font-bold pt-10">
             Change Your Network to {targetNetwork}!
           </div>
