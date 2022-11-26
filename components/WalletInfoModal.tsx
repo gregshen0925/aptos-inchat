@@ -66,11 +66,11 @@ const InboxModal = ({ avatar, setWalletInfoModalOn, username }: Props) => {
           <div className="py-4 px-6 rounded-t border-b dark:border-gray-800">
             <div className="flex justify-center p-5">
               <Image
-                className="object-contain bg-white rounded-full "
+                className="object-contain bg-white rounded-full"
                 height={100}
                 width={100}
                 src={avatar!}
-                alt="Profile Picture"
+                alt=""
               />
             </div>
             <div className="space-y-5 flex flex-col items-center">

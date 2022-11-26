@@ -16,6 +16,7 @@ type Props = {
   haveToken: boolean;
   chatGroupToken?: ChatInfo[];
   setPublicRoom?: Function;
+  publicRoom: boolean;
 };
 
 const MessageList = ({
@@ -23,6 +24,7 @@ const MessageList = ({
   haveToken,
   username,
   setPublicRoom,
+  publicRoom,
 }: Props) => {
   const {
     data: messages,
@@ -61,13 +63,13 @@ const MessageList = ({
 
   return (
     <div className="space-y-5 px-5 pt-8  max-w-2xl xl:max-w-4xl mx-auto min-h-screen bg-gray-800 rounded-2xl">
-      {messages ? (
+      {
         <div className="px-5">
           <button className="text-white" onClick={handleLastPage}>
             ⇦ Last Page
           </button>
         </div>
-      ) : null}
+      }
       {haveToken ? (
         messages ? (
           messages?.map((message) => (

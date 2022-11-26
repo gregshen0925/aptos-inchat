@@ -59,7 +59,10 @@ const Home = (props: Props) => {
     if (
       !connected ||
       !address ||
-      !(network?.name?.toString().toLowerCase() == targetNetwork||"Aptos testnet")
+      !(
+        network?.name?.toString().toLowerCase() == targetNetwork ||
+        "Aptos testnet"
+      )
     ) {
       setLoading(true);
       return;
@@ -142,12 +145,6 @@ const Home = (props: Props) => {
           username={username}
         />
       ) : null}
-      {network &&
-        !(network?.name?.toString().toLowerCase() == targetNetwork||"Aptos testnet") && (
-          <div className="text-white text-center font-bold pt-10">
-            Change Your Network to {targetNetwork}!
-          </div>
-        )}
 
       {!connected ? (
         <div>
@@ -162,6 +159,13 @@ const Home = (props: Props) => {
               height={800}
             />
           </div>
+        </div>
+      ) : !(
+          network?.name?.toString().toLowerCase() ==
+          (targetNetwork || "Aptos testnet")
+        ) ? (
+        <div className="text-white text-center font-bold pt-10">
+          Change Your Network to {targetNetwork}!
         </div>
       ) : loading ? (
         <div>
@@ -186,6 +190,7 @@ const Home = (props: Props) => {
             haveToken={false}
             chatGroupToken={chatGroupToken}
             setPublicRoom={setPublicRoom}
+            publicRoom={publicRoom}
           />
           <ChatInput username={""} avatar={avatar!} haveToken={false} />
         </div>
