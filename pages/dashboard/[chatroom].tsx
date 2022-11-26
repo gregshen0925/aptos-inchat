@@ -160,6 +160,7 @@ const Home = (props: Props) => {
             username={username}
             haveToken={tokenBalance > 0}
             setPublicRoom={undefined}
+            publicRoom={undefined}
           />
           <ChatInput
             username={username}

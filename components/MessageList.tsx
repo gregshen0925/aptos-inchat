@@ -16,7 +16,7 @@ type Props = {
   haveToken: boolean;
   chatGroupToken?: ChatInfo[];
   setPublicRoom?: Function;
-  publicRoom: boolean;
+  publicRoom?: boolean;
 };
 
 const MessageList = ({
