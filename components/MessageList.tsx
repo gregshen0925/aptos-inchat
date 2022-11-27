@@ -87,9 +87,9 @@ const MessageList = ({
           <div className="text-white text-center font-bold">
             Enter a Chatroom
           </div>
-          <div className="px-10">
-            <main className="p-10 rounded-lg">
-              <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 space-y-15">
+          <div className="px-10 flex justify-center">
+            <main className="py-10 rounded-lg">
+              <div className="grid md:grid-cols-2 md:space-x-10 lg:grid-cols-3 xl:grid-cols-4 space-y-15 ">
                 {chatGroupToken?.map((chatInfo, i) => (
                   <motion.div
                     whileTap={{
