@@ -37,13 +37,7 @@ const Home = (props: Props) => {
   const [inboxModalOn, setInboxModalOn] = useState<boolean>(false);
   const [chatGroupToken, setChatGroupToken] = useState<ChatInfo[]>();
   const [publicRoom, setPublicRoom] = useState<boolean>(false);
-  const {
-    account,
-    connected,
-    wallet: currentWallet,
-    network,
-    connect,
-  } = useWallet();
+  const { account, connected, wallet, network, connect } = useWallet();
   const [username, setUsername] = useState<string>("");
   const [avatar, setAvatar] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);

@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, FC } from "react";
+import React, { type FC } from "react";
 import {
   WalletAdapterNetwork,
   MartianWalletAdapter,

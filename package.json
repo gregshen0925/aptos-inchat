@@ -8,6 +8,7 @@
   "dependencies": {
     "@manahippo/aptos-wallet-adapter": "^1.0.2",
     "@solana/web3.js": "^1.66.2",
+    "all": "^0.0.0",
     "encoding": "^0.1.13",
     "framer-motion": "^7.6.6",
     "imgur": "^2.2.0",
